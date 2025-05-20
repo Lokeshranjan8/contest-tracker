@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # contest-tracker
 =======
 # React + Vite
