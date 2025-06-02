@@ -9,6 +9,8 @@ export default function Content() {
         const Mydata = async()=>{
             try{
                 let data;
+                const response_leetcode = await fetch ('http://localhost:3000/leetcode');
+                const leetcodeData = await response_leetcode.json();
                 if(selectedcontest===1){
                     const response = await fetch('http://localhost:3000/upcoming');
                     data = await response.json();
@@ -18,7 +20,8 @@ export default function Content() {
                     data = await response.json();
                     console.log(response);
                 }   
-                setContestData(data || []);
+                let allcontests = [...data, ...leetcodeData];
+                setContestData(allcontests || []);
 
             }catch(err){
                 console.error("Error fetching contest data:", err);
