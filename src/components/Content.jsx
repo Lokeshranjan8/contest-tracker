@@ -1,5 +1,6 @@
 import Card from "./Card"
 import {  useEffect, useState } from "react";
+import leetcodelogo from "../assets/leetcode_logo.001.jpeg";
 
 export default function Content() {
     const [selectedcontest,setselectedcontest]=useState(1);
@@ -56,10 +57,11 @@ export default function Content() {
                     {contestshowing.map((x, index) => (
                         <Card
                             key={index}
-                            title={x.title}
+                            title={x.name}
                             platform={x.platform}
                             starttime={x.startTime}
-                            Link={x.link}
+                            Link={x.url}
+                            // image={leetcodelogo}
                         />
                     ))}
                 </div>
