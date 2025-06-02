@@ -16,7 +16,7 @@ const fetchcontest = async(type ="upcoming") =>{
             filteredContests = contests.filter(contest => contest.startTimeSeconds <= now);
         }
         const sortedContests = filteredContests.sort((a, b) => a.startTimeSeconds - b.startTimeSeconds);
-        const upcomingContests = sortedContests.slice(0, 5).map(contest => {
+        const upcomingContests = sortedContests.slice(0, 2).map(contest => {
             const durationSeconds = contest.durationSeconds;
             const hours = Math.floor(durationSeconds / 3600);
             const minutes = Math.floor((durationSeconds % 3600) / 60);

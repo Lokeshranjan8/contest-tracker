@@ -25,7 +25,7 @@ const fetchLeetCodeContests = async()=> {
     const contests = response.data.data.allContests;
     const filteredContests = contests.filter(contest => contest.startTime > now);
     const sortedContests = filteredContests.sort((a, b) =>  new Date(a.startTime * 1000) - new Date(b.startTime * 1000));
-    const upcomingContests = sortedContests.slice(0, 5).map(c => ({
+    const upcomingContests = sortedContests.slice(0, 1).map(c => ({
         name: c.title,
         platform: "LeetCode",
         startTime: new Date(c.startTime * 1000).toLocaleString(),
