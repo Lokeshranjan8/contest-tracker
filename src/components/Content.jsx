@@ -1,74 +1,34 @@
 import Card from "./Card"
-import { use, useState } from "react";
+import {  useEffect, useState } from "react";
 
 export default function Content() {
     const [selectedcontest,setselectedcontest]=useState(1);
+    const [contestData, setContestData] = useState([]);
 
-    const upcomingContests = [
-        {
-            title: "Codeforces Round (Div. 2)",
-            platform: "Codeforces",
-            startTime: "May 24, 2025 - 6:30 PM",
-            link: "https://codeforces.com/contests"
-        
-        },
-        {
-            title: "AtCoder Beginner Contest",
-            platform: "AtCoder",
-            startTime: "May 25, 2025 - 12:30 PM",
-            link: "https://atcoder.jp/contests"
-        },
-        {
-            title: "AtCoder Beginner Contest",
-            platform: "AtCoder",
-            startTime: "May 25, 2025 - 12:30 PM",
-            link: "https://atcoder.jp/contests"
-        },
-    ];
+    useEffect(()=>{
+        const Mydata = async()=>{
+            try{
+                let data;
+                if(selectedcontest===1){
+                    const response = await fetch('http://localhost:3000/upcoming');
+                    data = await response.json();
+                    console.log(response);
+                }else{
+                    const response = await fetch('http://localhost:3000/past');
+                    data = await response.json();
+                    console.log(response);
+                }   
+                setContestData(data || []);
 
-    const pastContests = [
-        {
-            title: "Codeforces Round (Div. 2)",
-            platform: "Codeforces",
-            startTime: "May 24, 2025 - 6:30 PM",
-            link: "https://codeforces.com/contests"
-        
-        },
-        {
-            title: "AtCoder Beginner Contest",
-            platform: "AtCoder",
-            startTime: "May 25, 2025 - 12:30 PM",
-            link: "https://atcoder.jp/contests"
-        },
-        {
-            title: "AtCoder Beginner Contest",
-            platform: "AtCoder",
-            startTime: "May 25, 2025 - 12:30 PM",
-            link: "https://atcoder.jp/contests"
-        },
-        {
-            title: "Codeforces Round (Div. 2)",
-            platform: "Codeforces",
-            startTime: "May 24, 2025 - 6:30 PM",
-            link: "https://codeforces.com/contests"
-        
-        },
-        {
-            title: "AtCoder Beginner Contest",
-            platform: "AtCoder",
-            startTime: "May 25, 2025 - 12:30 PM",
-            link: "https://atcoder.jp/contests"
-        },
-        {
-            title: "AtCoder Beginner Contest",
-            platform: "AtCoder",
-            startTime: "May 25, 2025 - 12:30 PM",
-            link: "https://atcoder.jp/contests"
-        },
-        
-    ];
+            }catch(err){
+                console.error("Error fetching contest data:", err);
+            }
+        };
+        Mydata();
+    },[selectedcontest]);
 
-    const contestshowing = selectedcontest ==1?upcomingContests : pastContests;
+
+    const contestshowing =  contestData;
 
     return (
         <main className="flex-1">
@@ -76,13 +36,13 @@ export default function Content() {
                 <div className="flex gap-4">
 
                     <button className={`text-xl font-bold rounded-md shadown-md px-4 py-2 mb-4 ${selectedcontest===1?"bg-emerald-600 text-white" : "bg-gray-200"}`}
-                       onClick={()=>setselectedcontest(1)}
+                       onClick={()=> setselectedcontest(1) }
                     >
                        UPCOMING CONTESTS
                     </button>
 
                     <button className={`text-xl font-bold rounded-md shadown-md px-4 py-2 mb-4 ${selectedcontest===0?"bg-emerald-600 text-white" : "bg-gray-200"}`}
-                       onClick={()=>setselectedcontest(0)}
+                       onClick={()=> setselectedcontest(0) }
                     >
                      PAST CONTESTS
                     </button>

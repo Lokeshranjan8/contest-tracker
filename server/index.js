@@ -1,26 +1,29 @@
 import dotenv from "dotenv";
 dotenv.config();
+
 import express  from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
+
 const app= express();
+app.use(express.json());
+app.use(cors())
+
 const PORT= process.env.PORT || 3000;
 import fetchcontest from './fetchcontest.js';
 import fetchLeetCodeContests from "./leetcode.js";
-import codechefcontest from "./codechef.js";
+// import codechefcontest from "./codechef.js";
 
-app.use(cors());
-app.use(bodyParser.json());
-
+// ollama run phi3
 app.post("/analyze", async (req, res) => {
     const { prompt } = req.body;
+    console.log(prompt);
 
     try {
         const ollamaRes = await fetch("http://localhost:11434/api/generate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                model: "llama3",  // make sure you have pulled this model
+                model: "mistral",
                 prompt: prompt,
                 stream: false
             }),
@@ -36,15 +39,19 @@ app.post("/analyze", async (req, res) => {
 });
 
 
-
-
-
-
-app.get('/codeforce', async (req,res)=>{
+app.get('/upcoming', async (req,res)=>{
     try{
-        const contest = await fetchcontest();
+        const contest = await fetchcontest("upcoming");
+        console.log("Backend /upcoming contest data:", contest);
         res.json(contest)
-
+    }catch(err){
+        res.status(500).json({error:"failed to connect"})
+    }
+})
+app.get('/past', async (req,res)=>{
+    try{
+        const contest = await fetchcontest("past");
+        res.json(contest)
     }catch(err){
         res.status(500).json({error:"failed to connect"})
     }
@@ -60,19 +67,15 @@ app.get('/leetcode', async (req,res)=>{
 
 })
 
-app.get('/codechef', async(req,res) =>{
-    try{
-        const contest = await codechefcontest();
-        res.json(contest)
-    }catch(err){
-        res.status(500).json({error:"failed to connect codechef server"})
-    }
-})
+// app.get('/codechef', async(req,res) =>{
+//     try{
+//         const contest = await codechefcontest();
+//         res.json(contest)
+//     }catch(err){
+//         res.status(500).json({error:"failed to connect codechef server"})
+//     }
+// })
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`)
 })
-
-
-
-
