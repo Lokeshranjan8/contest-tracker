@@ -10,7 +10,7 @@ export default function Card({ title, platform, starttime, Link }) {
             <p className="text-sm text-gray-200 mb-6">{starttime}</p>
             <a 
               href={Link}
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               className="mt-auto hover-blue text-emerald-900 hover:bg-green-700 transition-colors rounded-lg shadow-md inline-block font-medium px-4 py-2 
                         bg-emerald-600 text-white"
             >
