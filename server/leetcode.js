@@ -30,7 +30,7 @@ const fetchLeetCodeContests = async()=> {
         platform: "LeetCode",
         startTime: new Date(c.startTime * 1000).toLocaleString(),
         duration: `${Math.floor(c.duration / 3600)} hr ${Math.floor((c.duration % 3600) / 60)} min`,
-        link: `https://leetcode.com/contest/${c.titleSlug}`
+        url: `https://leetcode.com/contest/${c.titleSlug}`
     }));
 
     return upcomingContests;
