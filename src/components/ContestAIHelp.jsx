@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-// ollama run mistral
+import ReactMarkdown from 'react-markdown';
 
 export default function ContestAIHelp() {
     const [contestLink, setContestLink] = useState("");
@@ -33,8 +32,6 @@ export default function ContestAIHelp() {
                     Contest AI Helper 🤖
                 </h1>
 
-                <p className="text-gray-800 whitespace-pre-wrap">{aiResponse || "Your results will appear here once you submit a contest link."}</p>
-
 
                 <div className="flex flex-col items-center space-y-4">
                     <input
@@ -56,7 +53,9 @@ export default function ContestAIHelp() {
 
                 <div className="mt-10 p-4 border-t pt-6">
                     <h2 className="text-xl font-semibold mb-2">AI Output:</h2>
-                    <p className="text-gray-500 italic whitespace-pre-wrap">{aiResponse}</p>
+                    <div className="max-w-7xl mx-auto bg-emerald-400 rounded-lg p-6 shadow-2xl mt-6 mb-6 italic font-semibold">
+                        <ReactMarkdown>{aiResponse || "Your AI-generated analysis will appear here after you submit a contest link."}</ReactMarkdown>
+                    </div>
                 </div>
             </div>
         </main>
