@@ -3,8 +3,7 @@ dotenv.config();
 
 import express  from "express";
 import cors from "cors";
-import axios from "axios";
-import cheerio from "cheerio";
+
 const app= express();
 app.use(express.json());
 app.use(cors())
@@ -15,47 +14,20 @@ import fetchLeetCodeContests from "./leetcode.js";
 
 // ollama run gemma:2b
 app.post("/analyze", async (req, res) => {
-    const { prompt } = req.body;
+    const { prompt,intent } = req.body;
     console.log("Received link:", prompt);
+    console.log("Received intent:", intent);
+    const myprompt = `You are an assistant. Your task is to ${intent}.\n\nHere is the problem:\n${prompt}`;
+
 
     try {
-        const html = await axios.get(prompt).then(res => res.data);
-        const $ = cheerio.load(html);
-
-        const title = $(".problem-statement .title").first().text();
-        const description = $(".problem-statement .problem-description").text();
-        const inputSpec = $(".problem-statement .input-specification").text();
-        const outputSpec = $(".problem-statement .output-specification").text();
-        const sampleTests = $(".problem-statement .sample-test").text();
-
-        const fullProblemText = `
-Problem Title: ${title}
-
-Description:
-${description}
-
-Input Specification:
-${inputSpec}
-
-Output Specification:
-${outputSpec}
-
-Sample Testcases:
-${sampleTests}
-
-Instructions:
-1. Explain the problem briefly.
-2. Suggest a solving approach with reasoning.
-3. Mention the expected time and space complexity.
-4. Provide a C++ solution with comments.
-        `;
-
+        
         const ollamaRes = await fetch("http://localhost:11434/api/generate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                model: "gemma:2b",  // You can change to "codellama" for better C++ output
-                prompt: fullProblemText,
+                model: "gemma:2b", 
+                prompt: myprompt,
                 stream: false
             }),
         });
