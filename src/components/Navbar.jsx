@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { Form, Link } from "react-router-dom";
-
+import CloseIcon from '@mui/icons-material/Close';
+import EmailIcon from '@mui/icons-material/Email';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 export default function Header() {
-    const [showform, setshowform] = useState(false);
-    const [name, setName] = useState("");
+    const [showform, setshowform] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loginsignup, setloginsignup] = useState(false);
 
     const handleSubmit = (e) => {
     e.preventDefault();
     alert("Login Successful!");
     setshowform(false);
-    setName("");
     setEmail("");
     setPassword("");
     };
@@ -38,39 +39,56 @@ export default function Header() {
                 </div>
             </div>
             {showform && (
-                <div className="fixed inset-0 bg-black bg-opacity-100 flex justify-center items-center z-20 ">
-                        <div className="bg-green-950 transition-transform hover:scale-[1.02] shadow-slate-40">
-                        <form method="post" className="flex flex-col space-y-4 p-10"
-                            onSubmit={handleSubmit}>
-                            <h2 className="text-2xl font-semibold text-green-600">Login/Signup</h2>
-                            <label className="text-green-600">Name:</label>
-                            <input
-                                type="text"name="name" value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="p-2 rounded-md border border-gray-300"
-                            />
-                            <label className="text-green-600">Email:</label>
-                            <input 
-                                type="email" name="email" value={email} 
-                                onChange={(e)=> setEmail(e.target.value)}
-                                className="p-2 rounded-md border border-gray-300"
-                            />
-                            <label className="text-green-600">Password:</label>
-                            <input
-                                type="password" name="password" value={password}
+                <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
+                    <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 relative">
+                        <button
+                            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 "
+                            onClick={() => setshowform(false)} 
+                        ><CloseIcon />
+                            <i className="fas fa-times"></i>
+                        </button>
+
+                        <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">Login </h2>
+
+                        <form method="post" className="space-y-5" onSubmit={handleSubmit}>
+                            <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
+                                <EmailIcon className="text-gray-400 mr-2" />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={email}
+                                    placeholder="Email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full focus:outline-none text-gray-700"
+                                />
+                            </div>
+                            <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
+                                <LockOpenIcon className="text-gray-400 mr-2"/>
+                                <input
+                                type="password"
+                                name="password"
+                                value={password}
+                                placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="p-2 rounded-md border border-gray-300"
-                            />
+                                className="w-full focus:outline-none text-gray-700"
+                               />
+                            </div>
                             <button
                                 type="submit"
-                                className="px-2 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+                                className="w-full bg-cyan-600 text-white py-2 rounded-md text-sm font-medium hover:bg-cyan-700 transition"
                             >
-                                SUBMIT
+                                Submit
                             </button>
-
                         </form>
+                        <p className="text-center text-sm text-gray-600 mt-4">
+                            Don't have an account?{" "}
+                            <a href="#" className="text-cyan-600 hover:underline">
+                                Signup here
+                            </a>
+                        </p>
                     </div>
                 </div>
+
             )}
         </>
     )
