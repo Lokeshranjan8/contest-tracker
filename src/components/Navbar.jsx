@@ -7,6 +7,7 @@ export default function Header() {
     const [showform, setshowform] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loginsignup, setloginsignup] = useState(false);
 
     const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,10 +41,9 @@ export default function Header() {
             {showform && (
                 <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
                     <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 relative">
-                        {/* Optional close button */}
                         <button
                             className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 "
-                            onClick={() => setshowform(false)} // if you want to close it
+                            onClick={() => setshowform(false)} 
                         ><CloseIcon />
                             <i className="fas fa-times"></i>
                         </button>
@@ -80,7 +80,6 @@ export default function Header() {
                                 Submit
                             </button>
                         </form>
-
                         <p className="text-center text-sm text-gray-600 mt-4">
                             Don't have an account?{" "}
                             <a href="#" className="text-cyan-600 hover:underline">
