@@ -41,7 +41,7 @@ const fetchLeetCodeContests = async()=> {
            ON CONFLICT (title, platform) DO NOTHING`,
           [title, platform, start_time, duration, link]
         );
-        console.log("Contest data inserted successfully");
+        console.log("LEETCODE data inserted successfully");
       } catch (error) {
         console.error("Error inserting contest data:", error);
       }
