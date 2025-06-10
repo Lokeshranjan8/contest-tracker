@@ -11,6 +11,7 @@ app.use(cors())
 const PORT= process.env.PORT || 3000;
 import fetchcontest from './fetchcontest.js';
 import fetchLeetCodeContests from "./leetcode.js";
+import authRoutes from './routes/auth.js';
 
 // ollama run gemma:2b
 app.post("/analyze", async (req, res) => {
@@ -78,6 +79,8 @@ app.get('/leetcode', async (req,res)=>{
 //         res.status(500).json({error:"failed to connect codechef server"})
 //     }
 // })
+
+app.use('/auth', authRoutes);
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`)
