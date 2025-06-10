@@ -3,15 +3,17 @@ import { Form, Link } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
 import EmailIcon from '@mui/icons-material/Email';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import Button from "@mui/material/Button";
 export default function Header() {
-    const [showform, setshowform] = useState(true);
+    const [showform, setshowform] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loginsignup, setloginsignup] = useState(false);
+    const [issignup, setissignup] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
 
     const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Login Successful!");
+    setSuccessMessage(issignup ? "Signup successful! You can now login." : "Login successful!");
     setshowform(false);
     setEmail("");
     setPassword("");
@@ -19,6 +21,11 @@ export default function Header() {
 
     return (
         <>
+            {successMessage && (
+                <div className="fixed top-20 left-0 right-0 mx-auto w-fit px-4 py-2 bg-green-500 text-white rounded shadow text-center z-50">
+                {successMessage}
+                </div>
+            )}
             <div className=" w-full  bg-neutral-950  sticky z-10 top-0 h-20  p-5  ">
                 <div className="flex justify-between bg-  " >
                     <div>
@@ -48,7 +55,7 @@ export default function Header() {
                             <i className="fas fa-times"></i>
                         </button>
 
-                        <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">Login </h2>
+                        <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">{issignup ?"Signup":"Login"}</h2>
 
                         <form method="post" className="space-y-5" onSubmit={handleSubmit}>
                             <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
@@ -57,7 +64,7 @@ export default function Header() {
                                     type="email"
                                     name="email"
                                     value={email}
-                                    placeholder="Email"
+                                    placeholder={!issignup ? "Enter your registered Email" : "Email"}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="w-full focus:outline-none text-gray-700"
                                 />
@@ -68,7 +75,7 @@ export default function Header() {
                                 type="password"
                                 name="password"
                                 value={password}
-                                placeholder="Password"
+                                placeholder={!issignup ? "Enter your registered Password" : "Password"}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full focus:outline-none text-gray-700"
                                />
@@ -81,10 +88,10 @@ export default function Header() {
                             </button>
                         </form>
                         <p className="text-center text-sm text-gray-600 mt-4">
-                            Don't have an account?{" "}
-                            <a href="#" className="text-cyan-600 hover:underline">
-                                Signup here
-                            </a>
+                            {issignup?"Don't have an account?":"Already have an account?"}
+                            <Button  className="text-cyan-600 hover:underline" onClick={()=>setissignup(!issignup)}>
+                                {issignup ? "Login" : "Signup"}
+                            </Button>
                         </p>
                     </div>
                 </div>
