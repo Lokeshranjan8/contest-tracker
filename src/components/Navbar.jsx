@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Authform from "./Authform";
 
 export default function Header() {
     const [showform, setshowform] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(0);
+
+    useEffect(() =>{
+        if( successMessage === "Login successful!") {
+            setProfile(1);
+        }
+    }, [successMessage]);
 
 
     return (
@@ -27,9 +34,16 @@ export default function Header() {
                         <li>
                             <Link to="/contest-ai-help" className="hover:underline text-green-600">Contest AI HELP</Link>
                         </li>
-                        <li>
-                            <button onClick={()=>setshowform(true)} className="hover:underline text-green-600">Login</button>
-                        </li>
+                        {isLoggedIn === 0 ? (
+                            <li>
+                                <button onClick={() => setshowform(true)} className="hover:underline text-green-600">Login</button>
+                            </li>
+                        ) : (
+                            <li>
+                                <button className="hover:underline text-green-600">Profile</button>
+                            </li>
+                        )
+                        }
                     </ul>
                 </div>
             </div>
@@ -37,6 +51,7 @@ export default function Header() {
                 <Authform
                     onClose={() => setshowform(false)}
                     setSuccessMessage={setSuccessMessage}
+                    setIsLoggedIn={setIsLoggedIn}
                 />
             )}
         </>
