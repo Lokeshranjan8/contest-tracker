@@ -4,7 +4,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import Button from "@mui/material/Button";
 
-export default function Authform({ onClose, setSuccessMessage }) {
+export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [issignup, setissignup] = useState(false);
@@ -13,7 +13,7 @@ export default function Authform({ onClose, setSuccessMessage }) {
         e.preventDefault();
 
         const url = issignup ? "http://localhost:3000/auth/signup" : "http://localhost:3000/auth/login";
-        const payload = { email, password };
+        const passeddata = { email, password };
 
         try {
             const res = await fetch(url, {
@@ -21,7 +21,7 @@ export default function Authform({ onClose, setSuccessMessage }) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(payload),
+                body: JSON.stringify(passeddata),
             });
 
             const data = await res.json();
@@ -31,6 +31,7 @@ export default function Authform({ onClose, setSuccessMessage }) {
             }
 
             setSuccessMessage(data.message || (issignup ? "Signup successful!" : "Login successful!"));
+            if( !issignup)  setIsLoggedIn(1);
             setTimeout(() => setSuccessMessage(""), 2000);
             onClose();
             setEmail("");
