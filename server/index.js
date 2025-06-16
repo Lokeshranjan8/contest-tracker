@@ -71,15 +71,6 @@ app.get('/leetcode', async (req,res)=>{
 
 })
 
-// app.get('/codechef', async(req,res) =>{
-//     try{
-//         const contest = await codechefcontest();
-//         res.json(contest)
-//     }catch(err){
-//         res.status(500).json({error:"failed to connect codechef server"})
-//     }
-// })
-
 app.use('/auth', authRoutes);
 
 app.listen(PORT,()=>{
