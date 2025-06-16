@@ -9,17 +9,37 @@ export default function Authform({ onClose, setSuccessMessage }) {
     const [password, setPassword] = useState("");
     const [issignup, setissignup] = useState(false);
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    const mess = (issignup ? "Signup successful! You can now login." : "Login successful!");
-    setSuccessMessage(mess);
-    setTimeout(() =>{
-        setSuccessMessage("");
-    }, 2000);
-    onClose();
-    setEmail("");
-    setPassword("");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const url = issignup ? "http://localhost:3000/auth/signup" : "http://localhost:3000/auth/login";
+        const payload = { email, password };
+
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.message || "Something went wrong");
+            }
+
+            setSuccessMessage(data.message || (issignup ? "Signup successful!" : "Login successful!"));
+            setTimeout(() => setSuccessMessage(""), 2000);
+            onClose();
+            setEmail("");
+            setPassword("");
+        }catch (err) {
+            alert("Error: " + err.message);
+        }
     };
+
     
     return (
         <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
