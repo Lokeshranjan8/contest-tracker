@@ -29,7 +29,7 @@ export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) 
             if (!res.ok) {
                 throw new Error(data.message || "Something went wrong");
             }
-
+            localStorage.setItem("authToken", data.token);
             setSuccessMessage(data.message || (issignup ? "Signup successful!" : "Login successful!"));
             if( !issignup)  setIsLoggedIn(1);
             setTimeout(() => setSuccessMessage(""), 2000);
