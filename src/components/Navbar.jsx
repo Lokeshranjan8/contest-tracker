@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Authform from "./Authform";
+import Regform from "./Regform";
 
 export default function Header() {
     const [showform, setshowform] = useState(false);
@@ -41,7 +42,7 @@ export default function Header() {
                             </li>
                         ) : (
                             <li>
-                                <button className="hover:underline text-green-600">Profile</button>
+                                <Link to="/reg-form" className="hover:underline text-green-600">Profile</Link>
                             </li>
                         )
                         }
