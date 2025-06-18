@@ -8,10 +8,11 @@ export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(0);
 
     useEffect(() =>{
-        if( successMessage === "Login successful!") {
-            setProfile(1);
+        const token = localStorage.getItem("authToken");
+        if( token ) {
+            setIsLoggedIn(1);
         }
-    }, [successMessage]);
+    }, []);
 
 
     return (
