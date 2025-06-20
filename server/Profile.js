@@ -7,7 +7,7 @@ const Profile = async(username) => {
 
     const url = `https://codeforces.com/api/user.info?handles=${username}`;
     const response = await axios.get(url);
-    try{
+    
         const userdata = response.data.result;
         for(const c of userdata){
             const handle = c.handle;
@@ -38,12 +38,6 @@ const Profile = async(username) => {
             lastOnline: new Date(user.lastOnlineTimeSeconds * 1000).toLocaleString(),
         }));
         return new_data;
-
-    }catch(error){
-        console.error("Error fetching profile data:", error);
-        return null;
-    }
-
 }
 
 export default Profile;
