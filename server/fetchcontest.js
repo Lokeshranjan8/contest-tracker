@@ -3,6 +3,7 @@ import pool from "./db.js";
 const fetchcontest = async(type ="upcoming") =>{
     console.log("Fetching contests from Codeforces API...");
     
+    // eslint-disable-next-line no-undef
     const url = process.env.CODEFORCES_API;
     const {data} = await axios.get(url);
     
@@ -16,10 +17,6 @@ const fetchcontest = async(type ="upcoming") =>{
         } else {
             filteredContests = contests.filter(contest => contest.startTimeSeconds <= now);
         }
-        // const durationSeconds = contest.durationSeconds;
-        // const hours = Math.floor(durationSeconds / 3600);
-        // const minutes = Math.floor((durationSeconds % 3600) / 60);
-        // const formattedDuration = `${hours} hr ${minutes} min`;
         const sortedContests = filteredContests.sort((a, b) => a.startTimeSeconds - b.startTimeSeconds);
         const upcomingContests = sortedContests.slice(0, 5);
         for(const c of upcomingContests){
@@ -60,6 +57,7 @@ const fetchcontest = async(type ="upcoming") =>{
         
     }
     catch(error){
+        console.log("Error fetching contests:", error);
         throw new Error("Failed to fetch contests");
     }
     
