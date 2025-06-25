@@ -1,6 +1,5 @@
 import Card from "./Card"
 import {  useEffect, useState } from "react";
-import leetcodelogo from "../assets/leetcode_logo.001.jpeg";
 
 export default function Content() {
     const [selectedcontest,setselectedcontest]=useState(1);
