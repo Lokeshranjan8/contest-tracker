@@ -13,6 +13,7 @@ const PORT= process.env.PORT || 3000;
 import fetchcontest from './fetchcontest.js';
 import fetchLeetCodeContests from "./leetcode.js";
 import authRoutes from './routes/auth.js';
+import Profile from "./Profile.js";
 import ProfileCF from "./routes/ProfileCF.js";
 
 // ollama run gemma:2b
@@ -76,17 +77,7 @@ app.get('/leetcode', async (req,res)=>{
 
 })
 
-// app.get('/profile/:username', async (req, res) => {
-//     try {
-//         const username = req.params.username;
-//         console.log("Fetching profile data for:", username);
-//         const profiledata = await Profile(username);
-//         res.json(profiledata);
-//     } catch (error){
-//         console.error("Error fetching profile data:", error);
-//         res.status(500).json({ error: "Failed to fetch profile data." });
-//     }
-// })
+
 app.use('/', ProfileCF);
 
 app.use('/auth', authRoutes);
