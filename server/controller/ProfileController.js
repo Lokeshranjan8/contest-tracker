@@ -4,19 +4,23 @@ import Submission from "../utils/Submission.js";
 import Topic from "../utils/Topics.js";
 
 const ProfileController = async (req, res) => {
-    const username = req.params.username;
+    const handle = req.params.username;
     try{
-        const userProfile = await Profile(username);
+        const userProfile = await Profile(handle);
         if (!userProfile) {
             return res.status(404).json({ error: "Profile not found" });
         }
-        const userSubmission = await Submission(username);
+        const userSubmission = await Submission(handle);
         const userSubmissionCount = userSubmission.length;
         if (!userSubmission) {
             return res.status(404).json({ error: "Submissions not found" });
         }
+        const userRating = await Rating(handle);
+        if (!userRating) {
+            return res.status(404).json({ error: "Rating not found" });
+        }
         const userTopic = await Topic(userSubmission);
-        const userRating = await Rating(userSubmission);
+        
 
         const response = {
             profile: userProfile[0],

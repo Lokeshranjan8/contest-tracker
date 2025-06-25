@@ -43,7 +43,7 @@ const Submission = async (handle) => {
             await pool.query(
                 `INSERT INTO ac_sub (submission_id, user_id, creation_time, problem_rating, tags)
                  VALUES ($1, $2, $3, $4, $5)
-                 ON CONFLICT (subid) DO NOTHING`,
+                 ON CONFLICT (submission_id) DO NOTHING`,
                 [c.subid, userid, c.creation_time, c.problem_rating, c.problem_tags]
             );
 
