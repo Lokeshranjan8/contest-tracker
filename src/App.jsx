@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import ContestAIHelp from "./components/ContestAIHelp";
 import Regform from "./components/Regform";
+import Dashboard from "./components/Dashboard";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Content />} />
           <Route path="/contest-ai-help" element={<ContestAIHelp />} />
           <Route path="/reg-form" element={<Regform />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
         </Routes>
 
 
