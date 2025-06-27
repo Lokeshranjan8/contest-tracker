@@ -1,14 +1,11 @@
 import axios from "axios";
-import pool from "../db";
+import pool from '../db.js';
 
 const Submission = async (handle) => {
     console.log("Fetching submission data for:", handle);
     const url = `https://codeforces.com/api/user.status?handle=${handle}`;
-    const userid = await pool.query(`SELECT user_id FROM profiles WHERE  handle = $1`, [handle]);
-    if (userid.rows.length === 0) {
-        console.error("User not found in the database.");
-        return null;
-    }
+    const Userid = await pool.query(`SELECT user_id FROM profiles WHERE  handle = $1`, [handle]);
+    const userid = Userid.rows[0].user_id;
     
     try{
         const response = await axios.get(url);
@@ -48,7 +45,7 @@ const Submission = async (handle) => {
             );
 
         }
-        console.log("Submission data inserted successfully");
+        //console.log("Submission data inserted successfully");
         return mydata;
     }catch(error){
         console.error("Error fetching submission data:", error);
