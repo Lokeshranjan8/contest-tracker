@@ -30,6 +30,7 @@ const Topic = async (handle) => {
             console.log("No ratings found for this user.");
             return [];
         }
+        //console.log("Ratings Map:", Map_Rating);
         return Map_Rating;
 
     }catch(error){
