@@ -45,9 +45,12 @@ export default function Dashboard() {
     };
 
     return (
-        <div>
-            hello dashbaord workign 
-        </div>
+        <main className="flex-1">
+            <div className="">
+
+            </div>
+
+        </main>
     )
 
 
