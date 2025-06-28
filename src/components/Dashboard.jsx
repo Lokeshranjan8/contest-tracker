@@ -1,3 +1,5 @@
+import UserSec from "./UserSec";
+import Barrating from "./Barrating";
 
 export default function Dashboard() {
     const Profile = {
@@ -43,10 +45,31 @@ export default function Dashboard() {
             "1700": 1
         }
     };
+    // const Profiledata = Profile.
 
     return (
-        <main className="flex-1">
-            <div className="">
+        <main className="flex-1 px-4">
+            <div className="max-w-7xl bg-white rounded-lg shadow-md mt-6 mb-6 mx-auto p-6">
+                {/* {Profiledata.map((x) => (
+                    <UserSec
+                        handle={x.handle}
+                        rating={x.rating}
+                        max_rating={x.max_rating}
+                        avatar={x.avatar}
+                        rank={x.rank}
+                        last_online={x.last_online}
+                    />
+                ))}; */}
+                <UserSec
+                    handle="lokesh"
+                    rating="1988"
+                    max_rating="2000"
+                    avatar="https://userpic.codeforces.org/no-title.jpg"
+                    rank="Expert"
+                    last_online="2025-06-25T10:52:12.000Z"
+                />
+                <Barrating/>
+                
 
             </div>
 
