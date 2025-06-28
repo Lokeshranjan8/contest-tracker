@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Regform() {
   const [cfhandle, setCfhandle] = useState("");
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+
+  const handlesubmit = (e)=>{
+    e.preventDefault();
+    // eslint-disable-next-line no-undef
+    navigate("/Dashboard" );
+  }
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
@@ -19,7 +28,7 @@ export default function Regform() {
           Enter Your Credentials!
         </h2>
 
-        <form method="post" className="space-y-6">
+        <form method="post" className="space-y-6" onSubmit={handlesubmit}  >
           <div className="border border-gray-300 rounded-md px-3 py-2">
             <input
               type="text"
@@ -30,15 +39,6 @@ export default function Regform() {
               className="w-full focus:outline-none text-gray-800 bg-transparent"
             />
           </div>
-
-          {/* <div className="border border-gray-300 rounded-md px-3 py-2">
-            <input
-              type="email"
-              name="email"
-              value={email}
-              className="w-full focus:outline-none text-gray-800 bg-transparent"
-            />
-          </div> */}
 
           <button
             type="submit"
