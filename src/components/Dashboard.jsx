@@ -1,5 +1,7 @@
 import UserSec from "./UserSec";
 import Barrating from "./Barrating";
+import Piechart from "./Piechart";
+
 
 export default function Dashboard() {
     const Profile = {
@@ -69,6 +71,7 @@ export default function Dashboard() {
                     last_online="2025-06-25T10:52:12.000Z"
                 />
                 <Barrating/>
+                <Piechart />
                 
 
             </div>
