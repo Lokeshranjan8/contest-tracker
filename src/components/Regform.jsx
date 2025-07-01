@@ -23,7 +23,7 @@ export default function Regform() {
 
   return (
     <main className="flex-1 flex justify-center items-center px-4 py-10">
-      <div className="w-full max-w-md sm:max-w-lg md:max-w-xl bg-white rounded-lg shadow-md p-6">
+      <div className="w-full max-w-md sm:max-w-lg md:max-w-xl bg-stone-900 rounded-lg shadow-md p-6">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-800">
           Enter Your Credentials!
         </h2>
