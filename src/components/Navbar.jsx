@@ -23,7 +23,7 @@ export default function Header() {
                 {successMessage}
                 </div>
             )}
-            <div className=" w-full  bg-neutral-950  sticky z-10 top-0 h-20  p-5  ">
+            <div className="w-full bg-neutral-950 sticky z-30 top-0 h-20 p-5">
                 <div className="flex justify-between bg-  " >
                     <div>
                         <h1 className="text-3xl font-semibold px-20  text-green-600">Contest Tracker</h1>

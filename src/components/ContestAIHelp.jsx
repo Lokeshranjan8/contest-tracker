@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import ReactMarkdown from 'react-markdown';
 
@@ -31,7 +32,7 @@ export default function ContestAIHelp() {
 
     return (
         <main className="flex-1">
-            <div className="max-w-7xl mx-auto bg-white rounded-lg p-6 shadow-md mt-6 mb-6">
+            <div className="max-w-7xl mx-auto bg-stone-900 rounded-lg p-6 shadow-md mt-6 mb-6">
                 <h1 className="text-3xl font-bold mb-4 text-center text-green-700">
                     Contest AI Helper 🤖
                 </h1>

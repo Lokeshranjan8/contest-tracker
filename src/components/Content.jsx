@@ -35,7 +35,7 @@ export default function Content() {
 
     return (
         <main className="flex-1 px-4">
-            <div className="max-w-7xl mx-auto bg-white rounded-lg p-6 shadow-md mt-6 mb-6">
+            <div className="max-w-6xl mx-auto bg-stone-900 rounded-lg p-6 shadow-md mt-6 mb-6">
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                     <button
