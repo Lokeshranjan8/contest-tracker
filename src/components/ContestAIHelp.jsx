@@ -32,8 +32,8 @@ export default function ContestAIHelp() {
 
     return (
         <main className="flex-1">
-            <div className="max-w-6xl mx-auto bg-stone-900 rounded-lg p-6 shadow-md mt-6 mb-6">
-                <h1 className="text-3xl font-bold mb-4 text-center bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent drop-shadow-lg">
+            <div className="max-w-7xl mx-auto bg-stone-900 rounded-lg p-6 shadow-md mt-6 mb-6">
+                <h1 className="text-3xl font-bold mb-4 text-center text-green-700">
                     Contest AI Helper 🤖
                 </h1>
 
@@ -44,27 +44,27 @@ export default function ContestAIHelp() {
                         value={contestLink}
                         onChange={(e) => setContestLink(e.target.value)}
                         placeholder="Paste your problem description here..."
-                        className="w-full max-w-2xl px-4 py-3 border-2 border-emerald-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white/95 backdrop-blur-sm text-gray-800 placeholder-gray-500 font-medium transition-all duration-300"
+                        className="w-full max-w-2xl px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
-                    <div className="flex flex-wrap justify-center gap-4 py-5">
+                    <div className="flex justify-between gap-2 py-5">
 
                     <button
-                        className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-blue-500"
+                        className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
                         onClick={()=>handleClick("need in c++")}
                     >
-                        🔧 Provide C++ Solution
+                        Provide C++ Solution
                     </button>
                     <button
-                        className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-semibold rounded-xl hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-emerald-500"
+                        className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
                         onClick={()=>handleClick("give me in python")}
                     >
-                        🐍 Provide Python Solution
+                        Provide Python Solution
                     </button>
                     <button
-                        className="px-8 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-purple-500"
+                        className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
                         onClick={()=>handleClick("give me hints")}
                     >
-                        💡 Give Me Hints
+                        Give Me Hints
                     </button>
                     </div>
 
@@ -72,7 +72,7 @@ export default function ContestAIHelp() {
 
                 <div className="mt-10 p-4 border-t border-gray-600 pt-6">
                     <h2 className="text-2xl font-bold mb-4 text-white">AI Output:</h2>
-                    <div className="max-w-7xl mx-auto bg-emerald-400 rounded-lg p-6 shadow-2xl mt-6 mb-6 italic font-semibold">
+                    <div className="max-w-7xl mx-auto bg-stone-800 rounded-lg p-6 shadow-2xl mt-6 mb-6 italic font-semibold text-green-400">
                         <ReactMarkdown>{aiResponse || "Your AI-generated analysis will appear here after you submit a problem description."}</ReactMarkdown>
                     </div>
                 </div>

@@ -36,15 +36,15 @@ export default function Header() {
 
                     <ul className="flex space-x-7 px-4 sm:px-8 lg:px-20 py-2 items-center text-lg font-medium">
                         <li>
-                            <a
-                                href="/"
+                            <Link
+                                to="/"
                                 className="relative group text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-500 to-teal-400 hover:from-green-300 hover:via-emerald-400 hover:to-cyan-400 transition-all duration-300"
                             >
                                 <span className="relative">
                                     Home
                                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-teal-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
                                 </span>
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
