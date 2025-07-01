@@ -32,7 +32,7 @@ export default function ContestAIHelp() {
 
     return (
         <main className="flex-1">
-            <div className="max-w-7xl mx-auto bg-stone-900 rounded-lg p-6 shadow-md mt-6 mb-6">
+            <div className="max-w-6xl mx-auto bg-stone-900 rounded-lg p-6 shadow-md mt-6 mb-6">
                 <h1 className="text-3xl font-bold mb-4 text-center bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent drop-shadow-lg">
                     Contest AI Helper 🤖
                 </h1>

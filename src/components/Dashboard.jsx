@@ -51,7 +51,7 @@ export default function Dashboard() {
 
     return (
         <main className="flex-1 px-4">
-            <div className="max-w-7xl bg-stone-900 rounded-lg shadow-md mt-6 mb-6 mx-auto p-6">
+            <div className="max-w-6xl bg-stone-900 rounded-lg shadow-md mt-6 mb-6 mx-auto p-6">
                 {/* {Profiledata.map((x) => (
                     <UserSec
                         handle={x.handle}
