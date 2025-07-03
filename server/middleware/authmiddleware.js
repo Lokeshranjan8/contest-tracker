@@ -9,9 +9,11 @@ const protect = (req, res, next) => {
 
   try {
     const token = authHeader.split(" ")[1];
+    // eslint-disable-next-line no-undef
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
+  // eslint-disable-next-line no-unused-vars
   } catch (err) {
     res.status(401).json({ message: "Invalid token" });
   }

@@ -43,7 +43,7 @@ const Profile = async(username) => {
             } catch(error){
                 console.error("Error inserting profile data:", error);
             }
-            console.log("Profile data inserted successfully.");
+            console.log("Profile data inserted successfully.", username);
             return {
                 handle,
                 rating,

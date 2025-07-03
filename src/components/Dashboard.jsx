@@ -14,31 +14,34 @@ export default function Dashboard() {
     const navigate = useNavigate();
 
     useEffect(() => {
-
-        if (location.state && location.state.profileData) {
+        if (location.state?.profileData) {
             setProfileData(location.state.profileData);
             setLoading(false);
         } else {
+            const storedHandle = localStorage.getItem("userHandle");
+
+            if (!storedHandle) {
+                navigate("/reg-form");
+                return;
+            }
 
             const fetchProfileData = async () => {
                 try {
-                    const url = "http://localhost:3000/profile/LokitheHuman"; // fallback username
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch profile data");
-                    }
+                    const response = await fetch(`http://localhost:3000/profile/${storedHandle}`);
+                    if (!response.ok) throw new Error("Failed to fetch profile data");
                     const data = await response.json();
                     setProfileData(data);
                 } catch (err) {
-                    console.error("Error fetching profile data:", err);
                     setError(err.message);
                 } finally {
                     setLoading(false);
                 }
             };
+
             fetchProfileData();
         }
-    }, [location.state]);
+    }, [location.state, navigate]);
+
 
     if (loading) {
         return (
@@ -60,7 +63,9 @@ export default function Dashboard() {
         );
     }
 
-    if (!profileData) return null;
+    if (!profileData) {
+        return <p className="text-center text-gray-400">No profile data available.</p>;
+    }
 
 
     const Profile = profileData;
