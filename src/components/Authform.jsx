@@ -45,7 +45,7 @@ export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) 
     
     return (
         <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
-            <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 relative">
+            <div className="w-full max-w-md bg-stone-900 rounded-xl shadow-lg p-8 relative">
                 <button
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 "
                     onClick={onClose}
@@ -57,14 +57,14 @@ export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) 
 
                 <form method="post" className="space-y-5" onSubmit={handleSubmit}>
                     <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
-                        <EmailIcon className="text-gray-400 mr-2" />
+                        <EmailIcon className="text-gray-800 mr-2" />
                         <input
                             type="email"
                             name="email"
                             value={email}
                             placeholder={!issignup ? "Enter your registered Email" : "Email"}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full focus:outline-none text-gray-700"
+                            className="w-full focus:outline-none text-stone-900"
                         />
                     </div>
                     <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
@@ -75,7 +75,7 @@ export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) 
                             value={password}
                             placeholder={!issignup ? "Enter your registered Password" : "Password"}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full focus:outline-none text-gray-700"
+                            className="w-full focus:outline-none text-stone-900"
                         />
                     </div>
                     <button

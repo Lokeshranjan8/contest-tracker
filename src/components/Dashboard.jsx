@@ -52,34 +52,23 @@ export default function Dashboard() {
     return (
         <main className="flex-1 px-4">
             <div className="max-w-6xl bg-stone-900 rounded-lg shadow-md mt-6 mb-6 mx-auto p-6">
-                {/* {Profiledata.map((x) => (
-                    <UserSec
-                        handle={x.handle}
-                        rating={x.rating}
-                        max_rating={x.max_rating}
-                        avatar={x.avatar}
-                        rank={x.rank}
-                        last_online={x.last_online}
-                    />
-                ))}; */}
                 <UserSec
-                    handle="lokesh"
-                    rating="1988"
-                    max_rating="2000"
-                    avatar="https://userpic.codeforces.org/no-title.jpg"
-                    rank="Expert"
-                    last_online="2025-06-25T10:52:12.000Z"
+                    handle={Profile.profile.handle}
+                    rating={Profile.profile.rating}
+                    max_rating={Profile.profile.max_rating}
+                    avatar={Profile.profile.avatar}
+                    rank={Profile.profile.rank}
+                    problemsolved={Profile.problemsolved}
+                    last_online={Profile.profile.last_online}
                 />
-                <Barrating/>
-                <Piechart />
-                
+                <Barrating
+                    data={Profile.rating}
+                />
+                <Piechart
+                    data={Profile.topics}
+                />
 
             </div>
-
         </main>
     )
-
-
-
-
 }

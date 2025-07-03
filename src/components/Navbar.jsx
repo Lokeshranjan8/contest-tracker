@@ -15,6 +15,14 @@ export default function Header() {
         }
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userEmail");
+        setIsLoggedIn(0);
+        setSuccessMessage("Logged out successfully!");
+        setTimeout(() => setSuccessMessage(""), 3000);
+    };
+
 
     return (
         <>
@@ -72,17 +80,30 @@ export default function Header() {
                                 </button>
                             </li>
                         ) : (
-                            <li>
-                                <Link
-                                    to="/reg-form"
-                                    className="relative group text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-500 to-teal-400 hover:from-green-300 hover:via-emerald-400 hover:to-cyan-400 transition-all duration-300"
-                                >
-                                    <span className="relative">
-                                        Profile
-                                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-teal-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
-                                    </span>
-                                </Link>
-                            </li>
+                            <>
+                                <li>
+                                    <Link
+                                        to="/reg-form"
+                                        className="relative group text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-500 to-teal-400 hover:from-green-300 hover:via-emerald-400 hover:to-cyan-400 transition-all duration-300"
+                                    >
+                                        <span className="relative">
+                                            Profile
+                                            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-teal-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
+                                        </span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="relative group text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:from-red-300 hover:via-red-400 hover:to-red-500 transition-all duration-300"
+                                    >
+                                        <span className="relative">
+                                            Logout
+                                            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-red-400 to-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
+                                        </span>
+                                    </button>
+                                </li>
+                            </>
                         )}
                     </ul>
 

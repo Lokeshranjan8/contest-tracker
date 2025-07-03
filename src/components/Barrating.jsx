@@ -1,20 +1,11 @@
 import {BarChart,Bar,CartesianGrid,XAxis,YAxis,Tooltip,ResponsiveContainer} from "recharts";
 
-export default function Barrating() {
-  const data = [
-    { name: "800", uv: 15 },
-    { name: "900", uv: 3 },
-    { name: "1000", uv: 2 },
-    { name: "1100", uv: 4 },
-    { name: "1200", uv: 7 },
-    { name: "1300", uv: 2 },
-    { name: "1400", uv: 1 },
-    { name: "1500", uv: 2 },
-    { name: "1600", uv: 4 },
-    { name: "1700", uv: 1 },
-    { name: "1800", uv: 1 },
-    { name: "1900", uv: 100},
-  ];
+export default function Barrating({data}) {
+
+  data = Object.entries(data).map(([rating, count]) =>({
+    name: rating,
+    uv: count,
+  }));
 
   const customTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {

@@ -1,4 +1,4 @@
-export default function UserSec({handle,rating,max_rating,avatar,rank,last_online}) {
+export default function UserSec({handle,rating,max_rating,avatar,rank,problemsolved,last_online}) {
     return (
         <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 mt-6">
             <div className="max-w-4xl mx-auto">
@@ -21,6 +21,11 @@ export default function UserSec({handle,rating,max_rating,avatar,rank,last_onlin
                             <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                                 <div className="text-sm text-gray-600 mb-1">Max Rating</div>
                                 <div className="text-xl font-bold text-green-600">{max_rating}</div>
+                            </div>
+
+                            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                <div className="text-sm text-gray-600 mb-1">Problem Solved</div>
+                                <div className="text-xl font-bold text-green-600">{problemsolved}</div>
                             </div>
 
                             <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">

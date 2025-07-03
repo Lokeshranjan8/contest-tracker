@@ -1,24 +1,11 @@
 import {PieChart,Pie,Cell,Tooltip,Legend,ResponsiveContainer} from "recharts";
 
-export default function Piechart() {
-    const data = [
-        { name: 'greedy', value: 23 },
-        { name: 'math', value: 15 },
-        { name: 'constructive algorithms', value: 13 },
-        { name: 'implementation', value: 12 },
-        { name: 'brute force', value: 9 },
-        { name: 'sortings', value: 5 },
-        { name: 'binary search', value: 4 },
-        { name: 'two pointers', value: 4 },
-        { name: 'strings', value: 3 },
-        { name: 'dp', value: 3 },
-        { name: 'number theory', value: 3 },
-        { name: 'bitmasks', value: 2 },
-        { name: 'data structures', value: 2 },
-        { name: 'graphs', value: 1 },
-        { name: 'probabilities', value: 1 },
-        { name: 'interactive', value: 1 }
-    ];
+export default function Piechart({data}) {
+
+    data = Object.entries(data).map(([name, count]) =>({
+        name: name,
+        value: count
+    }));
 
     const COLORS = [ 
         '#1f77b4','#ff4136','#2ca02c', '#9467bd', '#8c564b', 
