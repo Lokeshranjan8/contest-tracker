@@ -1,25 +1,63 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
+import ErrorDisplay from "./ErrorDisplay";
 
 export default function Regform() {
   const [cfhandle, setCfhandle] = useState("");
-  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  const handlesubmit = (e)=>{
+  const handlesubmit = async (e) => {
     e.preventDefault();
-    // eslint-disable-next-line no-undef
-    navigate("/Dashboard" );
+
+    if (!cfhandle.trim()) {
+      setError("Please enter a handle.");
+      return;
+    }
+
+    setLoading(true); 
+    setError(null);
+
+    try {
+      const response = await fetch(`http://localhost:3000/profile/${cfhandle}`);
+      if (!response.ok) throw new Error("Invalid handle or network error");
+
+      const data = await response.json();
+
+      localStorage.setItem("userHandle", cfhandle);
+      
+      navigate("/dashboard", { state: { profileData: data } });
+    } catch (err) {
+      setError(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <LoadingSpinner 
+        title="Loading Your Profile" 
+        subtitle="Fetching your contest data and statistics..." 
+      />
+    );
   }
 
-  useEffect(() => {
-    const storedEmail = localStorage.getItem("userEmail");
-    if (storedEmail) {
-      setEmail(storedEmail);
-    }
-  }, []);
-  console.log(email);
+  if (error) {
+    return (
+      <ErrorDisplay
+        error={error}
+        onRetry={() => {
+          setError(null);
+          setCfhandle("");
+        }}
+        retryText="Try Again"
+      />
+    );
+  }
 
   return (
     <main className="flex-1 flex justify-center items-center px-4 py-10 mt-10">
@@ -40,6 +78,7 @@ export default function Regform() {
                 value={cfhandle}
                 onChange={(e) => setCfhandle(e.target.value)}
                 placeholder="Enter Your Codeforces Handle"
+                required
                 className="w-full focus:outline-none text-white bg-transparent placeholder-gray-400 font-medium"
               />
             </div>

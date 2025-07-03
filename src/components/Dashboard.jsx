@@ -1,53 +1,69 @@
 import UserSec from "./UserSec";
 import Barrating from "./Barrating";
 import Piechart from "./Piechart";
-
+import LoadingSpinner from "./LoadingSpinner";
+import ErrorDisplay from "./ErrorDisplay";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
-    const Profile = {
-        profile: {
-            id: 2,
-            user_id: 38,
-            handle: "LokitheHuman",
-            rating: 1070,
-            max_rating: 1073,
-            avatar: "https://userpic.codeforces.org/no-title.jpg",
-            rank: "newbie",
-            last_online: "2025-06-25T10:52:12.000Z"
-        },
-        problemsolved: 43,
-        topics: {
-            greedy: 26,
-            math: 15,
-            implementation: 13,
-            "constructive algorithms": 13,
-            "brute force": 11,
-            sortings: 6,
-            "binary search": 4,
-            "two pointers": 4,
-            strings: 4,
-            "data structures": 3,
-            dp: 3,
-            "number theory": 3,
-            bitmasks: 2,
-            interactive: 1,
-            probabilities: 1,
-            graphs: 1
-        },
-        rating: {
-            "800": 15,
-            "900": 3,
-            "1000": 2,
-            "1100": 4,
-            "1200": 7,
-            "1300": 2,
-            "1400": 1,
-            "1500": 2,
-            "1600": 4,
-            "1700": 1
+    const [profileData, setProfileData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        if (location.state && location.state.profileData) {
+            setProfileData(location.state.profileData);
+            setLoading(false);
+        } else {
+
+            const fetchProfileData = async () => {
+                try {
+                    const url = "http://localhost:3000/profile/LokitheHuman"; // fallback username
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch profile data");
+                    }
+                    const data = await response.json();
+                    setProfileData(data);
+                } catch (err) {
+                    console.error("Error fetching profile data:", err);
+                    setError(err.message);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchProfileData();
         }
-    };
-    // const Profiledata = Profile.
+    }, [location.state]);
+
+    if (loading) {
+        return (
+            <LoadingSpinner 
+                title="Loading Your Profile" 
+                subtitle="Fetching your contest data and statistics..." 
+            />
+        );
+    }
+
+    if (error) {
+        return (
+            <ErrorDisplay
+                title="Oops! Something went wrong"
+                error={error}
+                onRetry={() => navigate("/reg-form")}
+                retryText="Enter Handle Again"
+            />
+        );
+    }
+
+    if (!profileData) return null;
+
+
+    const Profile = profileData;
 
     return (
         <main className="flex-1 px-4">

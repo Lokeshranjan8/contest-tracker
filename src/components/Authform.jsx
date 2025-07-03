@@ -53,21 +53,21 @@ export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) 
                     <i className="fas fa-times"></i>
                 </button>
 
-                <h2 className="text-center text-2xl font-bold text-gray-800 mb-6">{issignup ? "Signup" : "Login"}</h2>
+                <h2 className="text-center text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">{issignup ? "Create Account 🚀" : "Welcome Back 👋"}</h2>
 
                 <form method="post" className="space-y-5" onSubmit={handleSubmit}>
-                    <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
-                        <EmailIcon className="text-gray-800 mr-2" />
+                    <div className="flex items-center border-2 border-gray-600 rounded-xl px-4 py-3 bg-gray-800/50 backdrop-blur-sm focus-within:border-cyan-400 focus-within:ring-2 focus-within:ring-cyan-400/20 transition-all duration-300">
+                        <EmailIcon className="text-gray-100 mr-2" />
                         <input
                             type="email"
                             name="email"
                             value={email}
                             placeholder={!issignup ? "Enter your registered Email" : "Email"}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full focus:outline-none text-stone-900"
+                            className="w-full focus:outline-none text-white bg-transparent placeholder-gray-400 font-medium"
                         />
                     </div>
-                    <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
+                    <div className="flex items-center border-2 border-gray-600 rounded-xl px-4 py-3 bg-gray-800/50 backdrop-blur-sm focus-within:border-cyan-400 focus-within:ring-2 focus-within:ring-cyan-400/20 transition-all duration-300">
                         <LockOpenIcon className="text-gray-400 mr-2" />
                         <input
                             type="password"
@@ -75,14 +75,14 @@ export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) 
                             value={password}
                             placeholder={!issignup ? "Enter your registered Password" : "Password"}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full focus:outline-none text-stone-900"
+                            className="w-full focus:outline-none text-white bg-transparent placeholder-gray-400 font-medium"
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-cyan-600 text-white py-2 rounded-md text-sm font-medium hover:bg-cyan-700 transition"
+                        className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white py-3 rounded-xl text-base font-bold hover:from-cyan-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
                     >
-                        Submit
+                        ✨ {issignup ? "Create Account" : "Sign In"}
                     </button>
                 </form>
                 <p className="text-center text-sm text-gray-600 mt-4">

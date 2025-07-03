@@ -34,13 +34,13 @@ const Home = ({ children }) => {
     window.addEventListener("resize", setCanvasSize);
 
     const characters = "01";
-    // Responsive font size based on screen width
+
     const fontSize = isMobile ? 12 : window.innerWidth < 1024 ? 14 : 16;
     const columns = Math.floor(window.innerWidth / fontSize);
     const drops = Array(columns).fill(1);
 
     const draw = () => {
-      // Reduced opacity on mobile for better performance
+
       ctx.fillStyle = isMobile ? "rgba(0, 0, 0, 0.08)" : "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -59,7 +59,6 @@ const Home = ({ children }) => {
       });
     };
 
-    // Slower animation on mobile for better performance
     const animationSpeed = isMobile ? 50 : 33;
     const interval = setInterval(draw, animationSpeed);
     return () => {
