@@ -4,7 +4,7 @@ import pool from "./db.js";
 
 const Profile = async(username) => {
     console.log("Fetching profile data...");
-    const user_id = 38; 
+
     const existinguser = await pool.query(
         `SELECT * FROM profiles WHERE handle = $1`,
         [username]
@@ -27,17 +27,16 @@ const Profile = async(username) => {
             const lastonline  = new Date(c.lastOnlineTimeSeconds * 1000).toLocaleString();
             try {
                 await pool.query(
-                    `INSERT INTO profiles (user_id, handle, rating, max_rating, avatar, rank, last_online)
-                     VALUES ($1, $2, $3, $4, $5, $6, $7)
-                     ON CONFLICT (user_id) DO UPDATE 
-                     SET handle = EXCLUDED.handle,
-                         rating = EXCLUDED.rating,
+                    `INSERT INTO profiles (handle, rating, max_rating, avatar, rank, last_online)
+                     VALUES ($1, $2, $3, $4, $5, $6)
+                     ON CONFLICT (handle) DO UPDATE 
+                     SET rating = EXCLUDED.rating,
                          max_rating = EXCLUDED.max_rating,
                          avatar = EXCLUDED.avatar,
                          rank = EXCLUDED.rank,
                          last_online = EXCLUDED.last_online
                    `,
-                    [user_id, handle, rating, maxRating, avatar, rank, lastonline]
+                    [handle, rating, maxRating, avatar, rank, lastonline]
                 );
 
             } catch(error){
