@@ -4,8 +4,6 @@ import pool from '../db.js';
 const Submission = async (handle) => {
     console.log("Fetching submission data for:", handle);
     const url = `https://codeforces.com/api/user.status?handle=${handle}`;
-    const Userid = await pool.query(`SELECT user_id FROM profiles WHERE  handle = $1`, [handle]);
-    const userid = Userid.rows[0].user_id;
     
     try{
         const response = await axios.get(url);
@@ -14,7 +12,8 @@ const Submission = async (handle) => {
         const mydata = [];
 
         for(const c of ac ){
-            const subid = c.id;
+            const contest_id = c.contestId;
+            const problem_index = c.problem.index;
             const creationTimeSeconds = c.creationTimeSeconds;
             const creation_time = new Date(creationTimeSeconds * 1000);
             const problem = c.problem;
@@ -24,8 +23,8 @@ const Submission = async (handle) => {
     
 
             mydata.push({
-                subid,
-                userid,
+                contest_id,
+                problem_index,
                 creation_time,
                 problem_rating,
                 problem_tags
@@ -36,16 +35,14 @@ const Submission = async (handle) => {
             return [];
         }
         
-        for(const c of mydata){
+        for (const c of mydata) {
             await pool.query(
-                `INSERT INTO ac_sub (submission_id, user_id, creation_time, problem_rating, tags)
-                 VALUES ($1, $2, $3, $4, $5)
-                 ON CONFLICT (submission_id) DO NOTHING`,
-                [c.subid, userid, c.creation_time, c.problem_rating, c.problem_tags]
+                `INSERT INTO ac_sub (contest_id,problem_index, handle, creation_time, problem_rating, tags)
+                 VALUES ($1, $2, $3, $4, $5, $6)
+                 ON CONFLICT (handle,contest_id,problem_index) DO NOTHING`,
+                 [c.contest_id,c.problem_index, handle, c.creation_time, c.problem_rating, c.problem_tags]
             );
-
         }
-        //console.log("Submission data inserted successfully");
         return mydata;
     }catch(error){
         console.error("Error fetching submission data:", error);

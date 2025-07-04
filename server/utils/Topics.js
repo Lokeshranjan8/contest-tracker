@@ -2,8 +2,6 @@ import pool from '../db.js';
 
 const Topics = async (handle) => {
     const Map_Topic = {};
-    const userresult = await pool.query(`SELECT user_id FROM profiles WHERE handle = $1`, [handle]);
-    const user_id = userresult.rows[0].user_id;
 
     try {
         const result = await pool.query(`
@@ -11,11 +9,11 @@ const Topics = async (handle) => {
             FROM (
                 SELECT unnest(tags) AS tag
                 FROM ac_sub
-                WHERE user_id = $1
+                WHERE handle = $1
             ) AS exploded_tags
             GROUP BY tag
             ORDER BY count DESC;
-        `, [user_id]);
+        `, [handle]);
 
         for (const row of result.rows) {
             const topic = row.tag;

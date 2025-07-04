@@ -12,7 +12,6 @@ const ProfileController = async (req, res) => {
             return res.status(404).json({ error: "Profile not found" });
         }
         const userSubmission = await Submission(handle);
-        const userSubmissionCount = userSubmission.length;
         //console.log("User Submission Count:", userSubmissionCount);
         if (!userSubmission) {
             return res.status(404).json({ error: "Submissions not found" });
@@ -23,11 +22,12 @@ const ProfileController = async (req, res) => {
         }
         const userTopic = await Topic(handle);
         //console.log("User Topic: one 2nd step done", userTopic);
+        const totalSolved = Object.values(userRating).reduce((sum, count) => sum + count, 0);
         
 
         const response = {
             profile: userProfile,
-            problemsolved: userSubmissionCount,
+            problemsolved: totalSolved,
             topics: userTopic,
             rating: userRating
         }
