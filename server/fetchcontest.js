@@ -1,8 +1,17 @@
 import axios from "axios"
 import pool from "./db.js";
+import redisclient from "./redis.js";
+
+
 const fetchcontest = async(type ="upcoming") =>{
     console.log("Fetching contests from Codeforces API...");
     
+    const key = `codeforces:${type}`;
+    const cachedata = await redisclient.get(key);
+    if(cachedata){
+        console.log("return the daat from cache tab");
+        return JSON.parse(cachedata);
+    }
     // eslint-disable-next-line no-undef
     const url = process.env.CODEFORCES_API;
     const {data} = await axios.get(url);
@@ -53,6 +62,9 @@ const fetchcontest = async(type ="upcoming") =>{
                 url: `https://codeforces.com/contests/${contest.id}`,
             }
         })
+
+        await redisclient.setEx(key, 1800, JSON.stringify(new_data));
+        console.log("Cached contests in Redis.");
         return new_data;
         
     }
