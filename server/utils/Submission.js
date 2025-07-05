@@ -1,9 +1,17 @@
 import axios from "axios";
 import pool from '../db.js';
+import redisclient from '../redis.js';
 
 const Submission = async (handle) => {
     console.log("Fetching submission data for:", handle);
     const url = `https://codeforces.com/api/user.status?handle=${handle}`;
+
+    const key = `codeforces:submission:${handle}`;
+    const cachedData = await redisclient.get(key);
+    if (cachedData) {
+        console.log("Returning the data from cache");
+        return JSON.parse(cachedData);
+    }
     
     try{
         const response = await axios.get(url);
@@ -43,6 +51,8 @@ const Submission = async (handle) => {
                  [c.contest_id,c.problem_index, handle, c.creation_time, c.problem_rating, c.problem_tags]
             );
         }
+        await redisclient.setEx(key, 1800, JSON.stringify(mydata));
+        console.log("Cached submission data in Redis.");
         return mydata;
     }catch(error){
         console.error("Error fetching submission data:", error);

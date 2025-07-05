@@ -9,7 +9,7 @@ const fetchcontest = async(type ="upcoming") =>{
     const key = `codeforces:${type}`;
     const cachedata = await redisclient.get(key);
     if(cachedata){
-        console.log("return the daat from cache tab");
+        console.log("return the daata from cache tab");
         return JSON.parse(cachedata);
     }
     // eslint-disable-next-line no-undef

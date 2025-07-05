@@ -1,7 +1,14 @@
 import pool from '../db.js';
+import redisclient from '../redis.js';
 
 const Topic = async (handle) => {
     const Map_Rating = {};
+    const key = `codeforces:rating:${handle}`;
+    const cachedData = await redisclient.get(key);
+    if (cachedData) {
+        console.log("Returning the data from cache");
+        return JSON.parse(cachedData);
+    }
 
     try{
         const result = await pool.query(`
@@ -22,6 +29,8 @@ const Topic = async (handle) => {
             return [];
         }
         //console.log("Ratings Map:", Map_Rating);
+        await redisclient.setEx(key, 1800, JSON.stringify(Map_Rating));
+        console.log("Cached ratings data in Redis.");
         return Map_Rating;
 
     }catch(error){

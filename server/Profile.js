@@ -1,10 +1,16 @@
 import axios from "axios";
 import pool from "./db.js"; 
-
+import redisclient from "./redis.js";
 
 const Profile = async(username) => {
     console.log("Fetching profile data...");
 
+    const key = `codeforces:profile:${username}`;
+    const cachedData = await redisclient.get(key);
+    if(cachedData){
+        console.log("returning the data from cache");
+        return JSON.parse(cachedData);
+    }
     const existinguser = await pool.query(
         `SELECT * FROM profiles WHERE handle = $1`,
         [username]
@@ -42,16 +48,20 @@ const Profile = async(username) => {
             } catch(error){
                 console.error("Error inserting profile data:", error);
             }
-            console.log("Profile data inserted successfully.", username);
-            return {
-                handle,
-                rating,
-                maxRating,
-                avatar,
-                rank,
-                lastOnline: lastonline
-            };
         }
+
+        const new_data = userdata.map(data => ({
+            handle: data.handle,
+            rating: data.rating,
+            maxRating: data.maxRating,
+            avatar: data.titlePhoto || "https://static.codeforces.com/pictures/2020/01/01/default-avatar.png",
+            rank: data.rank,
+            lastOnline: new Date(data.lastOnlineTimeSeconds * 1000).toLocaleString(),
+        }));
+
+        await redisclient.setEx(key, 1800, JSON.stringify(new_data));
+        console.log("Cached  CF profile data in Redis.");
+        return new_data;
 }
 
 export default Profile;

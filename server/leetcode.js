@@ -1,5 +1,7 @@
 import axios from "axios";
 import pool from "./db.js"; 
+import redisclient from "./redis.js";
+
 
 const fetchLeetCodeContests = async()=> {
   const query = {
@@ -14,6 +16,13 @@ const fetchLeetCodeContests = async()=> {
       }
     `
   };
+
+  const key = `leetcode:upcoming`;
+  const cachedData = await redisclient.get(key);
+  if (cachedData) {
+    console.log("Returning the data from cache");
+    return JSON.parse(cachedData);
+  }
 
   try {
     const response = await axios.post("https://leetcode.com/graphql", query, {
@@ -47,14 +56,19 @@ const fetchLeetCodeContests = async()=> {
       }
     }
 
-    return upcomingContests.map(c => ({
+    const result =  upcomingContests.map(c => ({
         name: c.title,
         platform: "LeetCode",
         startTime: new Date(c.startTime * 1000).toLocaleString(),
         duration: `${Math.floor(c.duration / 3600)} hr ${Math.floor((c.duration % 3600) / 60)} min`,
         url: `https://leetcode.com/contest/${c.titleSlug}`
     }));
+    await redisclient.setEx(key, 1800, JSON.stringify(result));
+    console.log("Cached LeetCode contests in Redis.");
+    return result;
 
+
+   // eslint-disable-next-line no-unused-vars
    } catch (error) {
     throw new Error("Failed to fetch LeetCode contests");
    }
