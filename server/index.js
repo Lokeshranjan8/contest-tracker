@@ -16,7 +16,8 @@ import authRoutes from './routes/auth.js';
 import Profile from "./Profile.js";
 import ProfileCF from "./routes/ProfileCF.js";
 
-// ollama run gemma:2b
+// eslint-disable-next-line no-undef
+if (process.env.ENABLE_OLLAMA === 'true') {
 app.post("/analyze", async (req, res) => {
     const { prompt,intent } = req.body;
     console.log("Received link:", prompt);
@@ -45,7 +46,9 @@ app.post("/analyze", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch or process the problem." });
     }
 });
+}
 
+ol
 app.get('/upcoming', async (req,res)=>{
     try{
         const contest = await fetchcontest("upcoming");
