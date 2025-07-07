@@ -48,7 +48,7 @@ app.post("/analyze", async (req, res) => {
 });
 }
 
-ol
+
 app.get('/upcoming', async (req,res)=>{
     try{
         const contest = await fetchcontest("upcoming");
