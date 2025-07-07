@@ -78,6 +78,10 @@ app.get('/leetcode', async (req,res)=>{
 })
 
 
+app.get('/', async(req,res)=>{
+    res.send("Welcome to Contest Tracker API")
+})
+
 app.use('/', ProfileCF);
 
 app.use('/auth', authRoutes);
