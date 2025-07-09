@@ -6,14 +6,17 @@ export default function ContestAIHelp() {
     const [contestLink, setContestLink] = useState("");
     const [aiResponse, setAIResponse] = useState("");
     const [myintent,setintent] = useState("need in c++");
+
     const handleClick =  async(type) => {
         setintent(type);
+        const BaseUrl = import.meta.env.VITE_API_BASE_URL;
         console.log("Button clicked with type:", type);
         try{
-            const res = await fetch('http://localhost:3000/analyze', {
+            const res = await fetch(`${BaseUrl}/analyze`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
+
                 },
                 body: JSON.stringify({
                     prompt: contestLink  ,  

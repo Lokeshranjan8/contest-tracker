@@ -40,7 +40,6 @@ import Profile from "./Profile.js";
 import ProfileCF from "./routes/ProfileCF.js";
 
 // eslint-disable-next-line no-undef
-if (process.env.ENABLE_OLLAMA === 'true') {
 app.post("/analyze", async (req, res) => {
     const { prompt,intent } = req.body;
     console.log("Received link:", prompt);
@@ -50,26 +49,32 @@ app.post("/analyze", async (req, res) => {
 
     try {
         
-        const ollamaRes = await fetch("http://localhost:11434/api/generate", {
+        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json" ,
+                // eslint-disable-next-line no-undef
+                "Authorization": `Bearer ${process.env.GROQ_CF_API}`
+            },
             body: JSON.stringify({
-                model: "gemma:2b", 
-                prompt: myprompt,
-                stream: false
+                model: "llama3-8b-8192",
+                messages: [
+                    { role: "system", content: "You are a helpful assistant." },
+                    { role: "user", content: myprompt }
+                ]
             }),
         });
 
-        const data = await ollamaRes.json();
-        res.json({ response: data.response });
-        console.log("AI Response:", data.response);
+        const data = await groqRes.json();
+        const aiReply = data.choices[0]?.message?.content || "No response from AI";
+        console.log("AI Response:", aiReply);
+        res.json({ response: aiReply });
 
     } catch (err) {
         console.error("Error in processing:", err);
         res.status(500).json({ error: "Failed to fetch or process the problem." });
     }
 });
-}
 
 
 app.get('/upcoming', async (req,res)=>{
