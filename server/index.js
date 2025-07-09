@@ -4,25 +4,31 @@ dotenv.config();
 import express  from "express";
 import cors from "cors";
 
-const allowedOrigins = [
-  "http://localhost:5173",             
-  "https://contest-tracker-two.vercel.app/"
-];
+// const allowedOrigins = [
+//   "http://localhost:5173",             
+//   "https://contest-tracker-two.vercel.app/"
+// ];
 
 const app= express();
+app.use(cors({
+  origin: "*", // ⚠️ Allow all origins — only for testing
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json());
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
-}));
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     } else {
+//       return callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true
+// }));
 
 
 // eslint-disable-next-line no-undef
