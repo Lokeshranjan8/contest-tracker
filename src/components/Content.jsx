@@ -6,17 +6,18 @@ export default function Content() {
     const [contestData, setContestData] = useState([]);
 
     useEffect(()=>{
+        const Baseurl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
         const Mydata = async()=>{
             try{
                 let data;
-                const response_leetcode = await fetch ('http://localhost:3000/leetcode');
+                const response_leetcode = await fetch (`${Baseurl}/leetcode`);
                 const leetcodeData = await response_leetcode.json();
                 if(selectedcontest===1){
-                    const response = await fetch('http://localhost:3000/upcoming');
+                    const response = await fetch(`${Baseurl}/upcoming`);
                     data = await response.json();
                     console.log(response);
                 }else{
-                    const response = await fetch('http://localhost:3000/past');
+                    const response = await fetch(`${Baseurl}/past`);
                     data = await response.json();
                     console.log(response);
                 }   

@@ -14,6 +14,7 @@ export default function Dashboard() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const BaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
         if (location.state?.profileData) {
             setProfileData(location.state.profileData);
             setLoading(false);
@@ -27,7 +28,7 @@ export default function Dashboard() {
 
             const fetchProfileData = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/profile/${storedHandle}`);
+                    const response = await fetch(`${BaseUrl}/profile/${storedHandle}`);
                     if (!response.ok) throw new Error("Failed to fetch profile data");
                     const data = await response.json();
                     setProfileData(data);

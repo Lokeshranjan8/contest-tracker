@@ -11,8 +11,9 @@ export default function Authform({ onClose, setSuccessMessage , setIsLoggedIn}) 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const BaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
-        const url = issignup ? "http://localhost:3000/auth/signup" : "http://localhost:3000/auth/login";
+        const url = issignup ? `${BaseUrl}/auth/signup` : `${BaseUrl}/auth/login`;
         const passeddata = { email, password };
 
         try {
