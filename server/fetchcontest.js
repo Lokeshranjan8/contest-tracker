@@ -68,7 +68,7 @@ const fetchcontest = async(type ="upcoming") =>{
             }
         })
 
-        await redisclient.setEx(key, 18, JSON.stringify(new_data));
+        await redisclient.setEx(key, 1800, JSON.stringify(new_data));
         console.log("Cached contests in Redis.");
         return new_data;
         
