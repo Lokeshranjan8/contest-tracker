@@ -9,16 +9,18 @@ export default function Regform() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const Baseurl = import.meta.env.VITE_API_BASE_URL;
     if (!cfHandle.trim()) {
       setError("Handle cannot be empty.");
       return;
     }
+    console.log("Base URL:", Baseurl);
 
     try {
       setLoading(true);
       setError("");
 
-      const response = await fetch(`http://localhost:3000/profile/${cfHandle}`);
+      const response = await fetch(`${Baseurl}/profile/${cfHandle}`);
       if (!response.ok) throw new Error("Invalid handle or network error");
 
       const data = await response.json();
