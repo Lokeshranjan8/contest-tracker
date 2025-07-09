@@ -12,6 +12,7 @@ const fetchcontest = async(type ="upcoming") =>{
         console.log("return the daata from cache tab");
         return JSON.parse(cachedata);
     }
+    console.log("Fetching data from api as no cache found");
     // eslint-disable-next-line no-undef
     const url = process.env.CODEFORCES_API;
     const {data} = await axios.get(url);
@@ -27,12 +28,16 @@ const fetchcontest = async(type ="upcoming") =>{
             filteredContests = contests.filter(contest => contest.startTimeSeconds <= now);
         }
         const sortedContests = filteredContests.sort((a, b) => a.startTimeSeconds - b.startTimeSeconds);
-        const upcomingContests = sortedContests.slice(0, 5);
+        const upcomingContests = sortedContests.slice(0, 10);
         for(const c of upcomingContests){
             const title = c.name;
             const platform = "Codeforces";
             const start_time = new Date(c.startTimeSeconds * 1000).toLocaleString();
-            const duration = `${Math.floor(c.duration / 3600)} hr ${Math.floor((c.duration % 3600) / 60)} min`;
+            const durationSeconds = c.durationSeconds;
+            const duration = Number.isFinite(durationSeconds)
+                ? `${Math.floor(durationSeconds / 3600)} hr ${Math.floor((durationSeconds % 3600) / 60)} min`
+                : "Unknown";
+
             const link = `https://codeforces.com/contests/${c.id}`;
             try{
                 await pool.query(
@@ -63,7 +68,7 @@ const fetchcontest = async(type ="upcoming") =>{
             }
         })
 
-        await redisclient.setEx(key, 1800, JSON.stringify(new_data));
+        await redisclient.setEx(key, 18, JSON.stringify(new_data));
         console.log("Cached contests in Redis.");
         return new_data;
         

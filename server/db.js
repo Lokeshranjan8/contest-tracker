@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const pool = new Pool({
-    connectionString: process.env.PG_RENDER,
+    connectionString: process.env.NEON_DB,
     ssl: {
         rejectUnauthorized: false,
     }
@@ -19,5 +19,6 @@ try{
 }catch (error) {
     console.error("Error connecting to the database:", error);
 }
+
 
 export default pool;

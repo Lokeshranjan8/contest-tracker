@@ -23,6 +23,7 @@ const fetchLeetCodeContests = async()=> {
     console.log("Returning the data from cache");
     return JSON.parse(cachedData);
   }
+  console.log("Fetching data from api as no cache found");
 
   try {
     const response = await axios.post("https://leetcode.com/graphql", query, {
