@@ -14,7 +14,6 @@ export default function Regform() {
       setError("Handle cannot be empty.");
       return;
     }
-    console.log("Base URL:", Baseurl);
 
     try {
       setLoading(true);

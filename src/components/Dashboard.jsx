@@ -14,8 +14,7 @@ export default function Dashboard() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const BaseUrl = import.meta.env.VITE_API_BASE_URL;
-        console.log("Base URL:", BaseUrl);
+        const BaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
         if (location.state?.profileData) {
             setProfileData(location.state.profileData);
             setLoading(false);
