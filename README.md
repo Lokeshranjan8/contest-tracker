@@ -1,13 +1,9 @@
-# contest-tracker
+# Introduction
 
-# React + Vite
+ A Full Stack Web app I built to make life easier for competitive programmers like me. It connects to the Codeforces API and pulls in all the useful stuff—your profile, contest ratings, how many problems you've solved, and even your submission history.
+It also keeps track of upcoming and past contests so you never miss a challenge. You can quickly see what contests are scheduled, how long they’ll last, and even revisit previous ones to analyze your progress or retry problems.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Expanding the ESLint configuration
 
