@@ -18,25 +18,26 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
 
 
 
-## 🛠️ Tech Stack 
+## 🏗️ Backend Architecture
 
-### Frontend
+## Tech Stack 
+   ###  Frontend
 
-- **React.js** – For building fast and interactive UIs  
-- **Tailwind CSS** – For utility-first and responsive styling  
-- **Axios** – To make API requests from the frontend
+   - **React.js** – For building fast and interactive UIs  
+   - **Tailwind CSS** – For utility-first and responsive styling  
+   - **Axios** – To make API requests from the frontend
 
-### Backend
+   ###  Backend
 
-- **Node.js** – JavaScript runtime for server-side logic  
-- **Express.js** – Minimalist web framework to handle API routes  
-- **PostgreSQL** – For storing profiles, submissions, and contests  
-- **Redis** – For caching API responses (like profiles & contests)  
-- **Node-Cron** – To schedule background jobs like fetching contests every 24 hours
+   - **Node.js** – JavaScript runtime for server-side logic  
+   - **Express.js** – Minimalist web framework to handle API routes  
+   - **PostgreSQL** – For storing profiles, submissions, and contests  
+   - **Redis** – For caching API responses (like profiles & contests)  
+   - **Node-Cron** – To schedule background jobs like fetching contests every 24 hours
 
 ---
 
-## 🏗️ Backend Architecture
+## Backend Architecture
 
     server/
     ├── controller/            
@@ -106,5 +107,6 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 ---
 
 Built with ❤️ by **Lokesh Ranjan**
+
 
 
