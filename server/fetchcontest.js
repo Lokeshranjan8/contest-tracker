@@ -3,15 +3,22 @@ import pool from "./db.js";
 import redisclient from "./redis.js";
 
 
-const fetchcontest = async(type ="upcoming") =>{
+const fetchcontest = async(type ="upcoming", Refresh=false) =>{
     console.log("Fetching contests from Codeforces API...");
     
     const key = `codeforces:${type}`;
-    const cachedata = await redisclient.get(key);
-    if(cachedata){
-        console.log("return the daata from cache tab");
-        return JSON.parse(cachedata);
+    if(!Refresh){
+        try{
+            const cachedata = await redisclient.get(key);
+            if(cachedata){
+                console.log("Returning data from Redis cache");
+                return JSON.parse(cachedata);
+            }
+        }catch(error){
+            console.error("Error checking Redis cache:", error);
+        }
     }
+
     console.log("Fetching data from api as no cache found");
     // eslint-disable-next-line no-undef
     const url = process.env.CODEFORCES_API;
@@ -53,7 +60,7 @@ const fetchcontest = async(type ="upcoming") =>{
             }
         }
         
-        const new_data = sortedContests.slice(0, 2).map(contest => {
+        const new_data = sortedContests.slice(0, 10).map(contest => {
             const durationSeconds = contest.durationSeconds;
             const hours = Math.floor(durationSeconds / 3600);
             const minutes = Math.floor((durationSeconds % 3600) / 60);

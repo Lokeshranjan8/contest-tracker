@@ -3,6 +3,8 @@ dotenv.config();
 
 import express  from "express";
 import cors from "cors";
+import "./Cron/CronJob.js";
+
 
 // const allowedOrigins = [
 //   "http://localhost:5173",             
@@ -120,3 +122,5 @@ app.use('/auth', authRoutes);
 app.listen(PORT,'0.0.0.0',()=>{
     console.log(`server is running on port ${PORT}`)
 })
+
+export default app;
