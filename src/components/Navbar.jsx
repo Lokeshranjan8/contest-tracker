@@ -30,18 +30,19 @@ export default function Header() {
                 {successMessage}
                 </div>
             )}
-            <div className="w-full bg-neutral-950 fixed z-30 top-0 left-0 right-0 h-20 p-5 shadow-lg">
-                <div className="flex justify-between items-center" >
+            <div className="w-full bg-neutral-950 fixed z-30 top-0 left-0 right-0 h-20 p-3 sm:p-5 shadow-lg">
+                <div className="flex justify-between items-center h-full" >
                     <div className="group cursor-pointer">
-                        <h1 className="text-3xl lg:text-4xl font-bold px-4 sm:px-8 lg:px-20 text-emerald-400 hover:text-green-300 transition-all duration-300 transform hover:scale-105 drop-shadow-lg">
+                        <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold px-2 sm:px-4 lg:px-8 xl:px-20 text-emerald-400 hover:text-green-300 transition-all duration-300 transform hover:scale-105 drop-shadow-lg">
                             <span className="relative">
-                                CONTEST TRACKER
+                                <span className="hidden sm:inline">CONTEST TRACKER</span>
+                                <span className="sm:hidden">CONTEST</span>
                                 <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></div>
                             </span>
                         </h1>
                     </div>
 
-                    <ul className="flex space-x-7 px-4 sm:px-8 lg:px-20 py-2 items-center text-lg font-medium">
+                    <ul className="flex space-x-2 sm:space-x-4 lg:space-x-7 px-2 sm:px-4 lg:px-8 xl:px-20 py-2 items-center text-sm sm:text-base lg:text-lg font-medium">
                         <li>
                             <Link
                                 to="/"
@@ -60,7 +61,8 @@ export default function Header() {
                                 className="relative group text-green-400 hover:text-green-300 transition-all duration-300"
                             >
                                 <span className="relative">
-                                    Contest AI HELP
+                                    <span className="hidden sm:inline">Contest AI HELP</span>
+                                    <span className="sm:hidden">AI Help</span>
                                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-teal-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
                                 </span>
                             </Link>

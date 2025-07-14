@@ -72,8 +72,8 @@ export default function Dashboard() {
     const Profile = profileData;
 
     return (
-        <main className="flex-1 px-4">
-            <div className="max-w-6xl bg-stone-900 rounded-lg shadow-md mt-6 mb-6 mx-auto p-6">
+        <main className="flex-1 px-2 sm:px-4 lg:px-6">
+            <div className="max-w-7xl bg-stone-900 rounded-lg shadow-md mt-6 mb-6 mx-auto p-3 sm:p-4 lg:p-6">
                 <UserSec
                     handle={Profile.profile.handle}
                     rating={Profile.profile.rating}
