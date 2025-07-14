@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorDisplay from "./ErrorDisplay";
 
 export default function Regform() {
   const [cfHandle, setCfHandle] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [fatalError, setFatalError] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const Baseurl = import.meta.env.VITE_API_BASE_URL;
+    const Baseurl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
     if (!cfHandle.trim()) {
       setError("Handle cannot be empty.");
       return;
@@ -18,25 +21,47 @@ export default function Regform() {
     try {
       setLoading(true);
       setError("");
+      setFatalError(false);
 
       const response = await fetch(`${Baseurl}/profile/${cfHandle}`);
-      if (!response.ok) throw new Error("Invalid handle or network error");
+      
+      if (!response.ok) {
+          setFatalError(true);
+          return;
+      }
 
       const data = await response.json();
       localStorage.setItem("userHandle", cfHandle);
       navigate("/dashboard", { state: { profileData: data } });
     } catch (err) {
-      setError(err.message || "Something went wrong.");
+      if (!fatalError) {
+        setError(err.message || "Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
+  if (fatalError) {
+    return (
+      <ErrorDisplay
+        title="Oops!  Handle Not Found"
+        error="We're sorry, but we couldn't find any profile associated with this handle. Please check the handle and try again."
+        onRetry={() => {
+          setFatalError(false);
+          setError("");
+          setCfHandle("");
+        }}
+        retryText="Retry"
+      />
+    );
+  }
+
   return (
     <main className="flex-1 flex justify-center items-center px-4 py-6 sm:py-10 mt-20 sm:mt-10">
       <div className="w-full max-w-md sm:max-w-lg md:max-w-xl bg-stone-900 rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-700">
         <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-6 sm:mb-8 bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow-lg">
-          Enter Your Handle! 
+          Enter Your Handle!
         </h2>
 
         <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
@@ -50,6 +75,7 @@ export default function Regform() {
                 value={cfHandle}
                 onChange={(e) => setCfHandle(e.target.value)}
                 placeholder="e.g. tourist"
+                disabled={loading}
                 className="w-full bg-transparent text-white placeholder-gray-400 font-medium focus:outline-none text-sm sm:text-base"
               />
             </div>
