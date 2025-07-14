@@ -6,19 +6,19 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
 
 
 ## Tech Stack 
-### 🔹 Frontend
+   ###  Frontend
 
-  - **React.js** – For building fast and interactive UIs  
-  - **Tailwind CSS** – For utility-first and responsive styling  
-  - **Axios** – To make API requests from the frontend
+   - **React.js** – For building fast and interactive UIs  
+   - **Tailwind CSS** – For utility-first and responsive styling  
+   - **Axios** – To make API requests from the frontend
 
-### 🔹 Backend
+   ###  Backend
 
-  - **Node.js** – JavaScript runtime for server-side logic  
-  - **Express.js** – Minimalist web framework to handle API routes  
-  - **PostgreSQL** – For storing profiles, submissions, and contests  
-  - **Redis** – For caching API responses (like profiles & contests)  
-  - **Node-Cron** – To schedule background jobs like fetching contests every 24 hours
+   - **Node.js** – JavaScript runtime for server-side logic  
+   - **Express.js** – Minimalist web framework to handle API routes  
+   - **PostgreSQL** – For storing profiles, submissions, and contests  
+   - **Redis** – For caching API responses (like profiles & contests)  
+   - **Node-Cron** – To schedule background jobs like fetching contests every 24 hours
 
 ---
 
@@ -53,5 +53,27 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
     ├── leetcode.js           
     ├── Profile.js             
     └── redis.js               
+
+
+##  Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**!
+
+```bash
+# 1. Fork the repository
+# 2. Create your feature branch
+git checkout -b Branch-Name
+
+# 3. Commit your changes
+git commit -m "Add some Contribution"
+
+# 4. Push to the branch
+git push origin Branch-Name
+
+# 5. Open a Pull Request
+```
+
+
+## Author 
 
 
