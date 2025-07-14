@@ -35,27 +35,29 @@ export default function Content() {
     const contestshowing =  contestData;
 
     return (
-        <main className="flex-1 px-4">
-            <div className="max-w-6xl mx-auto bg-stone-900 rounded-lg p-6 shadow-md mt-6 mb-6">
+        <main className="flex-1 px-2 sm:px-4 lg:px-6">
+            <div className="max-w-7xl mx-auto bg-stone-900 rounded-lg p-3 sm:p-4 lg:p-6 shadow-md mt-6 mb-6">
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6">
                     <button
-                        className={`text-lg sm:text-xl font-semibold rounded-md shadow-md px-4 py-2 transition-all duration-300 
+                        className={`text-sm sm:text-lg lg:text-xl font-semibold rounded-md shadow-md px-3 sm:px-4 py-2 transition-all duration-300 
                         ${selectedcontest === 1 ? "bg-emerald-600 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
                         onClick={() => setselectedcontest(1)}
                     >
-                        UPCOMING CONTESTS
+                        <span className="hidden sm:inline">UPCOMING CONTESTS</span>
+                        <span className="sm:hidden">UPCOMING</span>
                     </button>
 
                     <button
-                        className={`text-lg sm:text-xl font-semibold rounded-md shadow-md px-4 py-2 transition-all duration-300 
+                        className={`text-sm sm:text-lg lg:text-xl font-semibold rounded-md shadow-md px-3 sm:px-4 py-2 transition-all duration-300 
                         ${selectedcontest === 0 ? "bg-emerald-600 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
                         onClick={() => setselectedcontest(0)}
                     >
-                        PAST CONTESTS
+                        <span className="hidden sm:inline">PAST CONTESTS</span>
+                        <span className="sm:hidden">PAST</span>
                     </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 justify-items-center">
                     {contestshowing.map((x, index) => (
                         <Card
                             key={index}
