@@ -1,6 +1,10 @@
 import axios from "axios";
 import pool from "./db.js"; 
 import redisclient from "./redis.js";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime.js";
+dayjs.extend(relativeTime);
+
 
 const Profile = async(username) => {
     console.log("Fetching profile data...");
@@ -30,7 +34,8 @@ const Profile = async(username) => {
             const maxRating = c.maxRating || 0;
             const avatar = c.titlePhoto || "https://static.codeforces.com/pictures/2020/01/01/default-avatar.png";
             const rank = c.rank || "newbie";
-            const lastonline  = new Date(c.lastOnlineTimeSeconds * 1000).toLocaleString();
+            const lastonline = dayjs.unix(c.lastOnlineTimeSeconds).fromNow();
+
             try {
                 await pool.query(
                     `INSERT INTO profiles (handle, rating, max_rating, avatar, rank, last_online)
@@ -56,7 +61,8 @@ const Profile = async(username) => {
             maxRating: data.maxRating,
             avatar: data.titlePhoto || "https://static.codeforces.com/pictures/2020/01/01/default-avatar.png",
             rank: data.rank,
-            lastOnline: new Date(data.lastOnlineTimeSeconds * 1000).toLocaleString(),
+            lastonline: dayjs.unix(data.lastOnlineTimeSeconds).fromNow()
+
         }));
 
         await redisclient.setEx(key, 1800, JSON.stringify(new_data));

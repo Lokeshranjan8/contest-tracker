@@ -16,8 +16,8 @@ export default function Piechart({data}) {
     const customTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
-                <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
-                    <p className="text-gray-700 font-medium">{`${payload[0].name}: ${payload[0].value} problems`}</p>
+                <div className="bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-600">
+                    <p className="text-gray-200 font-medium">{`${payload[0].name}: ${payload[0].value} problems`}</p>
                 </div>
             );
         }
@@ -25,9 +25,9 @@ export default function Piechart({data}) {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 mt-6">
+        <div className="bg-gray-900 rounded-lg shadow-md border border-gray-700 p-6 mt-6">
             <div className="max-w-4xl mx-auto">
-                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
+                <h3 className="text-xl font-bold text-white mb-4 text-center">
                     Problems by Tags
                 </h3>
 
@@ -65,7 +65,7 @@ export default function Piechart({data}) {
                                             className="w-3 h-3 rounded-sm mr-2 flex-shrink-0"
                                             style={{ backgroundColor: COLORS[index % COLORS.length] }}
                                         ></div>
-                                        <span className="text-gray-700 truncate">
+                                        <span className="text-gray-200 truncate">
                                             {entry.name} ({entry.value})
                                         </span>
                                     </div>
