@@ -1,17 +1,17 @@
 # 🏆 Contest Tracker
 
-A Full Stack Web app I built to make life easier for competitive programmers like me. It connects to the Codeforces API and pulls in all the useful stuff—your profile, contest ratings, how many problems you've solved, and even your submission history.
+A Full Stack Web app I built to make life easier for competitive programmers like me. It connects to the Codeforces API and pulls in all the useful stuff—your profile, contest ratings, how many problems you've solved.
 
 It also keeps track of upcoming and past contests so you never miss a challenge. You can quickly see what contests are scheduled, how long they'll last, and even revisit previous ones to analyze your progress or retry problems.
 
 ## ✨ Features
 
-- 📊 **Profile Analytics** - View your Codeforces profile with detailed statistics
-- 📈 **Rating Tracking** - Monitor your contest rating progress over time
-- 🔍 **Submission History** - Browse through your past submissions and solutions
-- 📅 **Contest Schedule** - Never miss upcoming contests with real-time updates
-- 💾 **Smart Caching** - Fast performance with Redis-powered caching
-- 🔐 **Secure Authentication** - JWT-based user authentication systemtroduction
+-  **Profile Analytics** - View your Codeforces profile with detailed statistics
+-  **Rating Tracking** - Monitor your contest rating progress over time
+-  **Submission Sorted By Tags** - "Accepted Problems Sorted by Ratings and  Topic Tags"
+-  **Contest Schedule** - Never miss upcoming contests with real-time updates
+-  **Smart Caching** - Fast performance with Redis-powered caching
+-  **Secure Authentication** - JWT-based user authentication systemtroduction
 
  A Full Stack Web app I built to make life easier for competitive programmers like me. It connects to the Codeforces API and pulls in all the useful stuff—your profile, contest ratings, how many problems you've solved, and even your submission history.
 It also keeps track of upcoming and past contests so you never miss a challenge. You can quickly see what contests are scheduled, how long they’ll last, and even revisit previous ones to analyze your progress or retry problems.
@@ -96,7 +96,7 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 **Lokesh Ranjan**
 
-- GitHub: [@lokesh-ranjan](https://github.com/lokesh-ranjan)
+- GitHub: [@Lokesh Ranjan](https://github.com/Lokeshranjan8)
 
 ## 🙏 Acknowledgments
 
