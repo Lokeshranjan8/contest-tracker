@@ -5,6 +5,53 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
 
 
 
-## Expanding the ESLint configuration
+## Tech Stack 
+### 🔹 Frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  - **React.js** – For building fast and interactive UIs  
+  - **Tailwind CSS** – For utility-first and responsive styling  
+  - **Axios** – To make API requests from the frontend
+
+### 🔹 Backend
+
+  - **Node.js** – JavaScript runtime for server-side logic  
+  - **Express.js** – Minimalist web framework to handle API routes  
+  - **PostgreSQL** – For storing profiles, submissions, and contests  
+  - **Redis** – For caching API responses (like profiles & contests)  
+  - **Node-Cron** – To schedule background jobs like fetching contests every 24 hours
+
+---
+
+## Backend Architecture
+
+    server/
+    ├── controller/            
+    │   ├── authController.js
+    │   └── ProfileController.js
+    │
+    ├── Cron/                
+    │   └── CronJob.js
+    │
+    ├── middleware/           
+    │   └── authmiddleware.js
+    │
+    ├── routes/                
+    │   ├── auth.js
+    │   └── ProfileCF.js
+    │
+    ├── utils/                 
+    │   ├── GenerateToken.js
+    │   ├── Rating.js
+    │   ├── Submission.js
+    │   └── Topics.js
+    │
+    ├── .env                   
+    ├── Clusters.js            
+    ├── db.js                
+    ├── fetchcontest.js        
+    ├── index.js              
+    ├── leetcode.js           
+    ├── Profile.js             
+    └── redis.js               
+
+
