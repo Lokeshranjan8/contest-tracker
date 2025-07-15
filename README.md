@@ -25,7 +25,6 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
 
    - **React.js** – For building fast and interactive UIs  
    - **Tailwind CSS** – For utility-first and responsive styling  
-   - **Axios** – To make API requests from the frontend
 
    ###  Backend
 
