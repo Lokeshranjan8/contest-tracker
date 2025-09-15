@@ -1,7 +1,6 @@
 # Stage 1: Build the frontend app
 FROM node:18 AS build
 
-# Set working directory
 WORKDIR /app
 
 # Install dependencies
@@ -15,30 +14,11 @@ RUN npm run build
 # Stage 2: Serve the app with Nginx
 FROM nginx:alpine
 
-# Set working directory for Nginx
-WORKDIR /usr/share/nginx/html
-
 # Copy built files from previous stage
-COPY --from=build /app/dist .
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
-
-CMD ["nginx", "-g", "daemon off;"]
-# Use official Node.js image instead of installing manually
-
-FROM node:18 AS build
-
-WORKDIR /app
-
-COPY package.json package-lock.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
