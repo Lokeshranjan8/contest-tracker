@@ -4,11 +4,13 @@ FROM node:18 AS build
 WORKDIR /app
 
 # Install dependencies
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm install
 
 # Copy source code and build
 COPY . .
+
+#Build the React app
 RUN npm run build
 
 # Stage 2: Serve the app with Nginx
