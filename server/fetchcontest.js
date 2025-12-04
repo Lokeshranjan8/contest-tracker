@@ -20,8 +20,10 @@ const fetchcontest = async(type ="upcoming", Refresh=false) =>{
     }
 
     console.log("Fetching data from api as no cache found");
-    // eslint-disable-next-line no-undef
+
     const url = process.env.CODEFORCES_API;
+    console.log(url)
+    
     const {data} = await axios.get(url);
     
     try {
@@ -75,7 +77,7 @@ const fetchcontest = async(type ="upcoming", Refresh=false) =>{
             }
         })
 
-        await redisclient.setEx(key, 1800, JSON.stringify(new_data));
+        await redisclient.setEx(key, 18, JSON.stringify(new_data));
         console.log("Cached contests in Redis.");
         return new_data;
         

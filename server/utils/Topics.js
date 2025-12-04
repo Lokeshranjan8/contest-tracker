@@ -1,18 +1,23 @@
 import pool from '../db.js';
 import redisclient from '../redis.js';
+import { timeoutp } from './Timeout.js';
+
 
 const Topics = async (handle) => {
-    const Map_Topic = {};
-   
-    const key = `codeforces;topics:${handle}`;
+    if (!handle) throw new Error("Handle is required");
+  
+    // Redis cache check
+    const key = `codeforces:topics:${handle}`;
     const cacheData = await redisclient.get(key);
     if(cacheData) {
-        console.log("Returning the data from cache");
         return JSON.parse(cacheData);
     }
+    
 
+    let result;
     try {
-        const result = await pool.query(`
+        result = await timeoutp(
+            pool.query(`
             SELECT tag, COUNT(*) AS count
             FROM (
                 SELECT unnest(tags) AS tag
@@ -21,17 +26,22 @@ const Topics = async (handle) => {
             ) AS exploded_tags
             GROUP BY tag
             ORDER BY count DESC;
-        `, [handle]);
-
-        for (const row of result.rows) {
-            const topic = row.tag;
-            Map_Topic[topic] = parseInt(row.count);
-        }
-        await redisclient.setEx(key, 1800, JSON.stringify(Map_Topic));
-        return Map_Topic;
-    } catch (error) {
-        console.error("Error fetching topics data:", error);
+            `, [handle]),4000);
+    }catch (error) {
         return null;
     }
+
+
+    const Map_Topic = {};
+
+    for (const row of result.rows) {
+        const topic = row.tag;
+        Map_Topic[topic] = parseInt(row.count);
+    }
+    
+    await redisclient.setEx(key, 300, JSON.stringify(Map_Topic));
+    return Map_Topic;
+
 }
+
 export default Topics;

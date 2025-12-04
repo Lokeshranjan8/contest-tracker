@@ -6,17 +6,12 @@ import cors from "cors";
 import "./Cron/CronJob.js";
 
 
-// const allowedOrigins = [
-//   "http://localhost:5173",             
-//   "https://contest-tracker-two.vercel.app/"
-// ];
-
 const app= express();
-app.use(cors({
-  origin: "*", // ⚠️ Allow all origins — only for testing
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+// app.use(cors({
+//   origin: "*", // ⚠️ Allow all origins — only for testing
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
 
 app.use(express.json());
 

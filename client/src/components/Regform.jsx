@@ -11,7 +11,8 @@ export default function Regform() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const Baseurl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+    const Baseurl = import.meta.env.VITE_API_BASE_URL || `http://localhost:${import.meta.env.VITE_BACKEND_PORT }`;
+    console.log("Using backend URL:", Baseurl);
 
     if (!cfHandle.trim()) {
       setError("Handle cannot be empty.");
