@@ -7,11 +7,12 @@ import "./Cron/CronJob.js";
 
 
 const app= express();
-// app.use(cors({
-//   origin: "*", // ⚠️ Allow all origins — only for testing
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   allowedHeaders: ["Content-Type", "Authorization"]
-// }));
+app.use(cors({
+  origin: "http://localhost:3000", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
 
 app.use(express.json());
 

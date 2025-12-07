@@ -6,7 +6,8 @@ export default function Content() {
     const [contestData, setContestData] = useState([]);
 
     useEffect(()=>{
-        const Baseurl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+        //const Baseurl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+        const Baseurl = "http://localhost:5000";
         const Mydata = async()=>{
             try{
                 let data;

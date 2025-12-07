@@ -15,15 +15,11 @@ const fetchcontest = async(type ="upcoming", Refresh=false) =>{
                 return JSON.parse(cachedata);
             }
         }catch(error){
-            console.error("Error checking Redis cache:", error);
+            throw new Error("Error fetching from cache" + error.message);
         }
     }
 
-    console.log("Fetching data from api as no cache found");
-
-    const url = process.env.CODEFORCES_API;
-    console.log(url)
-    
+    const url = process.env.CODEFORCES_API;    
     const {data} = await axios.get(url);
     
     try {
@@ -77,8 +73,7 @@ const fetchcontest = async(type ="upcoming", Refresh=false) =>{
             }
         })
 
-        await redisclient.setEx(key, 18, JSON.stringify(new_data));
-        console.log("Cached contests in Redis.");
+        await redisclient.setEx(key, 180, JSON.stringify(new_data));
         return new_data;
         
     }

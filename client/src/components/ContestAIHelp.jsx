@@ -9,7 +9,7 @@ export default function ContestAIHelp() {
 
     const handleClick =  async(type) => {
         setintent(type);
-        const BaseUrl = import.meta.env.VITE_API_BASE_URL;
+        const BaseUrl = "http://localhost:5000";
         console.log("Button clicked with type:", type);
         try{
             const res = await fetch(`${BaseUrl}/analyze`, {
