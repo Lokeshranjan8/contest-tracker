@@ -70,8 +70,6 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
 
 
 
-## 🏗️ Backend Architecture
-
 ## Tech Stack 
    ###  Frontend
 
@@ -87,39 +85,6 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
    - **Node-Cron** – To schedule background jobs like fetching contests every 24 hours
 
 ---
-
-## Backend Architecture
-
-    server/
-    ├── controller/            
-    │   ├── authController.js
-    │   └── ProfileController.js
-    │
-    ├── Cron/                
-    │   └── CronJob.js
-    │
-    ├── middleware/           
-    │   └── authmiddleware.js
-    │
-    ├── routes/                
-    │   ├── auth.js
-    │   └── ProfileCF.js
-    │
-    ├── utils/                 
-    │   ├── GenerateToken.js
-    │   ├── Rating.js
-    │   ├── Submission.js
-    │   └── Topics.js
-    │
-    ├── .env                   
-    ├── Clusters.js            
-    ├── db.js                
-    ├── fetchcontest.js        
-    ├── index.js              
-    ├── leetcode.js           
-    ├── Profile.js             
-    └── redis.js               
-
 
 ## 🤝 Contributing
 
