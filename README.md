@@ -1,3 +1,55 @@
+# How to Setup Locally
+
+Follow these steps to set up and run the project locally using Docker Compose:
+
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed (for running migration commands)
+
+## Steps
+
+1. **Clone the repository**
+
+    ```bash
+    git clone https://github.com/Lokeshranjan8/contest-tracker.git
+    cd contest-tracker
+    ```
+
+2. **Start all services using Docker Compose**
+
+    ```bash
+    docker compose up --build
+    ```
+
+    This will build and start the backend, frontend, and database containers.
+
+3. **Run database migrations**
+
+    Open a new terminal and navigate to the `server` directory:
+
+    ```bash
+    cd server
+    npx knex migrate:latest
+    ```
+
+    This will apply all database migrations to set up the schema.
+
+4. **Access the application**
+
+    - The frontend should be available at [http://localhost:3000](http://localhost:3000) (or the port specified in your Docker setup).
+    - The backend API should be available at [http://localhost:5000](http://localhost:5000) (or the port specified in your Docker setup).
+
+## Stopping the Services
+
+To stop all running containers:
+
+```bash
+docker compose down
+```
+
+---
+
 # 🏆 Contest Tracker
 
 A Full Stack Web app I built to make life easier for competitive programmers like me. It connects to the Codeforces API and pulls in all the useful stuff—your profile, contest ratings, how many problems you've solved.
@@ -75,6 +127,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 ```bash
 # 1. Fork the repository
+
 # 2. Create your feature branch
 git checkout -b Branch-Name
 
