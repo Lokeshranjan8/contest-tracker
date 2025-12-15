@@ -70,8 +70,6 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
 
 
 
-## 🏗️ Backend Architecture
-
 ## Tech Stack 
    ###  Frontend
 
