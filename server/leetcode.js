@@ -1,6 +1,6 @@
 import axios from "axios";
-import pool from "./db.js"; 
-import redisclient from "./redis.js";
+import pool from "./DB/db.js"; 
+import redisclient from "./Caching/redis.js";
 
 
 const fetchLeetCodeContests = async()=> {
@@ -64,7 +64,7 @@ const fetchLeetCodeContests = async()=> {
         duration: `${Math.floor(c.duration / 3600)} hr ${Math.floor((c.duration % 3600) / 60)} min`,
         url: `https://leetcode.com/contest/${c.titleSlug}`
     }));
-    await redisclient.setEx(key, 1800, JSON.stringify(result));
+    await redisclient.setEx(key, 30, JSON.stringify(result));
     console.log("Cached LeetCode contests in Redis.");
     return result;
 

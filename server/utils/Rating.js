@@ -1,18 +1,9 @@
-import pool from '../db.js';
-import redisclient from '../redis.js';
+import pool from '../DB/db.js';
 import { timeoutp } from './Timeout.js';
 
 
 const Rating = async (handle) => {
     if (!handle) throw new Error("Handle is required");
-
-
-    const key = `codeforces:rating:${handle}`;
-    const cachedData = await redisclient.get(key);
-    if (cachedData) {
-        return JSON.parse(cachedData);
-    }
-
 
     let result;
     try{
@@ -42,8 +33,6 @@ const Rating = async (handle) => {
     if(Object.keys(Map_Rating).length === 0){
         return {};
     }
-
-    await redisclient.setEx(key, 300, JSON.stringify(Map_Rating));
     return Map_Rating;
 
 

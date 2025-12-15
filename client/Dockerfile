@@ -5,7 +5,8 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json ./
-RUN npm install
+COPY package-lock.json ./
+RUN npm ci
 
 # Copy source code and build
 COPY . .
@@ -15,6 +16,9 @@ RUN npm run build
 
 # Stage 2: Serve the app with Nginx
 FROM nginx:alpine
+
+
+RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy nginx configuration file
 COPY nginx.conf  /etc/nginx/conf.d/default.conf

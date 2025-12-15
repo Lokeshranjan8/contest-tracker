@@ -1,4 +1,4 @@
-import pool from  "../db.js";
+import pool from  "../DB/db.js";
 import bcrypt from "bcrypt";
 import generateToken from "../utils/GenerateToken.js";
 

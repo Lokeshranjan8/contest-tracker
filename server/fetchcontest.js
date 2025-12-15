@@ -1,6 +1,6 @@
 import axios from "axios"
-import pool from "./db.js";
-import redisclient from "./redis.js";
+import pool from "./DB/db.js";
+import redisclient from "./Caching/redis.js";
 
 
 const fetchcontest = async(type ="upcoming", Refresh=false) =>{
@@ -73,7 +73,7 @@ const fetchcontest = async(type ="upcoming", Refresh=false) =>{
             }
         })
 
-        await redisclient.setEx(key, 180, JSON.stringify(new_data));
+        await redisclient.setEx(key, 30, JSON.stringify(new_data));
         return new_data;
         
     }

@@ -70,25 +70,28 @@ export default function Dashboard() {
     }
 
 
-    const Profile = profileData;
+    const FullProfile = profileData;
+    console.log(FullProfile.profile);
+    //data type
+    console.log(typeof FullProfile.profile);
 
     return (
         <main className="flex-1 px-2 sm:px-4 lg:px-6">
             <div className="max-w-7xl bg-stone-900 rounded-lg shadow-md mt-6 mb-6 mx-auto p-3 sm:p-4 lg:p-6">
                 <UserSec
-                    handle={Profile.profile.handle}
-                    rating={Profile.profile.rating}
-                    max_rating={Profile.profile.max_rating}
-                    avatar={Profile.profile.avatar}
-                    rank={Profile.profile.rank}
-                    problemsolved={Profile.problemsolved}
-                    last_online={Profile.profile.last_online}
+                    handle={FullProfile.profile.handle}
+                    rating={FullProfile.profile.rating}
+                    max_rating={FullProfile.profile.max_rating}
+                    avatar={FullProfile.profile.avatar}
+                    rank={FullProfile.profile.rank}
+                    problemsolved={FullProfile.problemsolved}
+                    last_online={FullProfile.profile.last_online}
                 />
                 <Barrating
-                    data={Profile.rating}
+                    data={FullProfile.rating}
                 />
                 <Piechart
-                    data={Profile.topics}
+                    data={FullProfile.topics}
                 />
 
             </div>

@@ -1,18 +1,9 @@
-import pool from '../db.js';
-import redisclient from '../redis.js';
+import pool from '../DB/db.js';
 import { timeoutp } from './Timeout.js';
 
 
 const Topics = async (handle) => {
     if (!handle) throw new Error("Handle is required");
-  
-    // Redis cache check
-    const key = `codeforces:topics:${handle}`;
-    const cacheData = await redisclient.get(key);
-    if(cacheData) {
-        return JSON.parse(cacheData);
-    }
-    
 
     let result;
     try {
@@ -39,7 +30,6 @@ const Topics = async (handle) => {
         Map_Topic[topic] = parseInt(row.count);
     }
     
-    await redisclient.setEx(key, 300, JSON.stringify(Map_Topic));
     return Map_Topic;
 
 }

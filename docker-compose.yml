@@ -7,9 +7,6 @@ services:
     container_name: my-backend
     ports:
       - "5000:5000"
-    volumes:
-      - ./server:/app
-      - /app/node_modules
     environment:
       - NODE_ENV=development
       - CODEFORCES_API=https://codeforces.com/api/contest.list
@@ -30,6 +27,19 @@ services:
     depends_on:
       - backend
 
+
+  # ai-service:
+  #   build: ./ai-service
+  #   container_name: my-ai-service
+  #   ports:
+  #     - "8081:8081"
+  #   volumes:
+  #     - ./ai-service:/app
+  #     - /app/node_modules
+  #   environment:
+  #     - REDIS_URL=redis://redis:6379
+  #   depends_on:
+  #     - redis
 
   postgres:
     image: postgres:15-alpine

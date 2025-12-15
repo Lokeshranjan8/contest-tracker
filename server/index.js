@@ -23,7 +23,6 @@ const PORT= process.env.PORT || 5000;
 import fetchcontest from './fetchcontest.js';
 import fetchLeetCodeContests from "./leetcode.js";
 import authRoutes from './routes/auth.js';
-import Profile from "./Profile.js";
 import ProfileCF from "./routes/ProfileCF.js";
 
 // eslint-disable-next-line no-undef
