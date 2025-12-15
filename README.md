@@ -88,39 +88,6 @@ It also keeps track of upcoming and past contests so you never miss a challenge.
 
 ---
 
-## Backend Architecture
-
-    server/
-    ├── controller/            
-    │   ├── authController.js
-    │   └── ProfileController.js
-    │
-    ├── Cron/                
-    │   └── CronJob.js
-    │
-    ├── middleware/           
-    │   └── authmiddleware.js
-    │
-    ├── routes/                
-    │   ├── auth.js
-    │   └── ProfileCF.js
-    │
-    ├── utils/                 
-    │   ├── GenerateToken.js
-    │   ├── Rating.js
-    │   ├── Submission.js
-    │   └── Topics.js
-    │
-    ├── .env                   
-    ├── Clusters.js            
-    ├── db.js                
-    ├── fetchcontest.js        
-    ├── index.js              
-    ├── leetcode.js           
-    ├── Profile.js             
-    └── redis.js               
-
-
 ## 🤝 Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**!
